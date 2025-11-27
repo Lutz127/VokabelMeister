@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}German Vocabulary App{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
+    <style>
+    .progress-fill {
+        transition: width 0.5s ease;
+    }
+    </style>
+
+    <!-- Scale whole UI on larger screens -->
+    <style>
+        /* default for phones / small screens */
+        html {
+            font-size: 12px;
+        }
+
+        /* make everything ~50% bigger on desktop */
+        @media (min-width: 1024px) {
+            html {
+                font-size: 24px; /* 16 * 1.5 = 24 */
+            }
+        }
+    </style>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen bg-gradient-to-b from-black via-black via-red-600 to-yellow-400 text-slate-900 font-[Montserrat]">
+    <div class="min-h-screen flex flex-col">
+        <!-- Navbar -->
+        <header class="bg-zinc-950/0 text-white shadow">
+            <nav class="max-w-8xl mx-auto px-4 py-3 flex items-center justify-between">
+                <a href="{{ url_for('index') }}" class="flex items-center gap-2 font-semibold text-lg">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}"
+                        alt="Logo"
+                        class="h-8 w-8 object-contain">
+                    <span>German Vocabulary App</span>
+                </a>
+                <div class="space-x-4 text-sm">
+
+                    <a href="{{ url_for('index') }}" class="hover:underline">Home</a>
+
+                    {% if 'user_id' in session %}
+                        <!-- If logged in: show username-->
+                        <a href="{{ url_for('account') }}" class="hover:underline">
+                            {{ session['username'] }}
+                        </a>
+
+                    {% else %}
+                        <!-- If not logged in: show "Log in" -->
+                        <a href="{{ url_for('login') }}" class="hover:underline">Log in</a>
+                    {% endif %}
+
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main content -->
+        <main class="flex-1">
+            <div class="max-w-5xl mx-auto px-4 py-6">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+
+        
+        <!-- Footer -->
+        <footer class="bg-slate-900/20 text-slate-200 text-xs">
+            <div class="max-w-8xl mx-auto px-2 py-2 text-center">
+                <span>© 2025 Lutz127 • German Vocabulary App</span>
+            </div>
+        </footer>
+
+    <!-- Main JS file -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+
+    <audio id="correct-sound" src="{{ url_for('static', filename='sfx/correct.mp3') }}"></audio>
+    <audio id="wrong-sound" src="{{ url_for('static', filename='sfx/wrong.mp3') }}"></audio>
+    <audio id="type-sound" src="{{ url_for('static', filename='sfx/type.mp3') }}"></audio>
+</body>
+</html>

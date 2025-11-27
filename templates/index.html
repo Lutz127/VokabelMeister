@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+
+{% block title %}
+German Vocabulary App
+{% endblock %}
+
+{% block content %}
+
+<!-- HOMEPAGE CONTENT -->
+<div class="home-content text-center max-w-4xl mx-auto px-4">
+
+    <h1 class="text-5xl font-bold mb-8 text-white">Choose a category</h1>
+
+    <!-- Category Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+        <!-- A1 Verbs -->
+        <a data-category="a1_verbs"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">A1 Verbs</h2>
+
+            <div class="progress-a1_verbs absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- A1 Adjectives -->
+        <a data-category="a1_adjectives"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">A1 Adjectives</h2>
+
+            <div class="progress-a1_adjectives absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Colors -->
+        <a data-category="colors"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Colors</h2>
+
+            <div class="progress-colors absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Numbers -->
+        <a data-category="numbers"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Numbers</h2>
+
+            <div class="progress-numbers absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Time -->
+        <a data-category="time"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Time</h2>
+
+            <div class="progress-time absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Clothing -->
+        <a data-category="clothing"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Clothing</h2>
+
+            <div class="progress-clothing absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Family -->
+        <a data-category="family"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Family</h2>
+
+            <div class="progress-family absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Weather -->
+        <a data-category="weather"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Weather</h2>
+
+            <div class="progress-weather absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Jobs -->
+        <a data-category="jobs"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Jobs</h2>
+
+            <div class="progress-jobs absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <!-- Test -->
+        <a data-category="test"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+            <h2 class="text-3xl font-semibold text-white text-center">Test</h2>
+
+            <div class="progress-test absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+<!-- Quiz Content (hidden at first) -->
+<div id="quiz-container" class="hidden mt-[54px] flex justify-center">
+    <div id="quiz-wrapper" class="w-full max-w-9xl flex flex-col items-center max-w-3xl mx-auto w-full px-4">
+        
+        <div class="flex justify-center mb-4 gap-4">
+            <button id="mode-de-en" class="px-4 py-2 bg-yellow-300 rounded font-bold">
+                German → English
+            </button>
+            <button id="mode-en-de" class="px-4 py-2 bg-black/40 text-white rounded font-bold">
+                English → German
+            </button>
+        </div>
+
+        <!-- Timer -->
+        <div id="live-timer"
+             class="bg-black/50 p-3 rounded-xl shadow text-center text-yellow-300 text-xl mb-4 font-bold w-full">
+             Time: 0m 0.0s
+        </div>
+
+        <!-- Progress Bar -->
+        <div id="progress-container" class="w-full bg-black/30 rounded-full h-3 mb-4">
+            <div id="progress-bar" class="h-3 bg-yellow-400 rounded-full" style="width: 0%;"></div>
+        </div>
+
+        <!-- Quiz content -->
+        <div id="quiz-content" class="w-full"></div>
+    </div>
+</div>
+
+
+
+{% endblock %}

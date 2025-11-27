@@ -1,0 +1,38 @@
+[
+    {"german": "Montag", "english": "Monday"},
+    {"german": "Dienstag", "english": "Tuesday"},
+    {"german": "Mittwoch", "english": "Wednesday"},
+    {"german": "Donnerstag", "english": "Thursday"},
+    {"german": "Freitag", "english": "Friday"},
+    {"german": "Samstag", "english": "Saturday"},
+    {"german": "Sonntag", "english": "Sunday"},
+
+    {"german": "Januar", "english": "January"},
+    {"german": "Februar", "english": "February"},
+    {"german": "März", "english": "March"},
+    {"german": "April", "english": "April"},
+    {"german": "Mai", "english": "May"},
+    {"german": "Juni", "english": "June"},
+    {"german": "Juli", "english": "July"},
+    {"german": "August", "english": "August"},
+    {"german": "September", "english": "September"},
+    {"german": "Oktober", "english": "October"},
+    {"german": "November", "english": "November"},
+    {"german": "Dezember", "english": "December"},
+
+    {"german": "Frühling", "english": "spring"},
+    {"german": "Sommer", "english": "summer"},
+    {"german": "Herbst", "english": "autumn"},
+    {"german": "Winter", "english": "winter"},
+
+    {"german": "heute", "english": "today"},
+    {"german": "morgen", "english": "tomorrow"},
+    {"german": "gestern", "english": "yesterday"},
+    {"german": "jetzt", "english": "now"},
+    {"german": "bald", "english": "soon"},
+    {"german": "später", "english": "later"},
+
+    {"german": "Sekunde", "english": "second"},
+    {"german": "Stunde", "english": "hour"},
+    {"german": "Minute", "english": "minute"}
+]

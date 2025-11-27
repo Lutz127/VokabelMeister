@@ -1,0 +1,22 @@
+[
+    {"german": "der Arzt", "english": "doctor"},
+    {"german": "der Lehrer", "english": "teacher"},
+    {"german": "der Verkäufer", "english": "salesman"},
+    {"german": "der Kellner", "english": "waiter"},
+    {"german": "der Koch", "english": "cook"},
+    {"german": "der Ingenieur", "english": "engineer"},
+    {"german": "der Polizist", "english": "police officer"},
+    {"german": "der Journalist", "english": "journalist"},
+    {"german": "der Mechaniker", "english": "mechanic"},
+    {"german": "der Bauer", "english": "farmer"},
+    {"german": "der Friseur", "english": "hairdresser"},
+    {"german": "der Architekt", "english": "architect"},
+    {"german": "der Elektriker", "english": "electrician"},
+    {"german": "der Pilot", "english": "pilot"},
+    {"german": "der Student", "english": "student"},
+    {"german": "der Fahrer", "english": "driver"},
+    {"german": "der Krankenpfleger", "english": "nurse"},
+    {"german": "der Chef", "english": "boss"},
+    {"german": "der Verkäufer", "english": "seller / salesperson / vendor / shop assistant"},
+    {"german": "der Künstler", "english": "artist"}
+]
