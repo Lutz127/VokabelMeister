@@ -77,7 +77,7 @@ def register():
         db = get_db()
 
         existing = execute(db,
-            "SELECT * FROM users WHERE username = ?", (username,)
+            "SELECT * FROM users WHERE username = %s", (username,)
         ).fetchone()
 
         if existing:
@@ -87,7 +87,7 @@ def register():
         hash_pw = generate_password_hash(password)
 
         execute(db,
-            "INSERT INTO users (username, hash) VALUES (?, ?)",
+            "INSERT INTO users (username, hash) VALUES (%s, %s)",
             (username, hash_pw)
         )
         db.commit()
@@ -108,7 +108,7 @@ def login():
 
         db = get_db()
 
-        user = execute(db,"SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+        user = execute(db,"SELECT * FROM users WHERE username = %s", (username,)).fetchone()
         if not user or not check_password_hash(user["hash"], password):
             flash("Invalid username or password")
             return redirect("/login")
@@ -139,7 +139,7 @@ def save_score():
     db = get_db()
 
     existing = execute(db,
-        "SELECT * FROM scores WHERE user_id = ? AND category = ?",
+        "SELECT * FROM scores WHERE user_id = %s AND category = %s",
         (session["user_id"], category)
     ).fetchone()
 
@@ -151,13 +151,13 @@ def save_score():
         if score > old_score or (score == old_score and time < old_time):
             execute(db,"""
                 UPDATE scores
-                SET best_score = ?, best_time = ?
-                WHERE id = ?
+                SET best_score = %s, best_time = %s
+                WHERE id = %s
             """, (score, time, existing["id"]))
     else:
         execute(db,"""
             INSERT INTO scores (user_id, category, best_score, best_time)
-            VALUES (?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s)
         """, (session["user_id"], category, score, time))
 
     db.commit()
@@ -174,7 +174,7 @@ def account():
     stats = execute(db,"""
         SELECT category, best_score, best_time
         FROM scores
-        WHERE user_id = ?
+        WHERE user_id = %s
         ORDER BY category
     """, (session["user_id"],)).fetchall()
 
