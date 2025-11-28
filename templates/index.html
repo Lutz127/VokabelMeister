@@ -18,7 +18,7 @@ German Vocabulary App
         <a data-category="a1_verbs"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">A1 Verbs</h2>
 
             <div class="progress-a1_verbs absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -30,7 +30,7 @@ German Vocabulary App
         <a data-category="a1_adjectives"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">A1 Adjectives</h2>
 
             <div class="progress-a1_adjectives absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -42,7 +42,7 @@ German Vocabulary App
         <a data-category="colors"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Colors</h2>
 
             <div class="progress-colors absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -54,7 +54,7 @@ German Vocabulary App
         <a data-category="numbers"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Numbers</h2>
 
             <div class="progress-numbers absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -66,7 +66,7 @@ German Vocabulary App
         <a data-category="time"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Time</h2>
 
             <div class="progress-time absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -78,7 +78,7 @@ German Vocabulary App
         <a data-category="clothing"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Clothing</h2>
 
             <div class="progress-clothing absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -90,7 +90,7 @@ German Vocabulary App
         <a data-category="family"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Family</h2>
 
             <div class="progress-family absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -102,7 +102,7 @@ German Vocabulary App
         <a data-category="weather"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Weather</h2>
 
             <div class="progress-weather absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -114,7 +114,7 @@ German Vocabulary App
         <a data-category="jobs"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Jobs</h2>
 
             <div class="progress-jobs absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -126,7 +126,7 @@ German Vocabulary App
         <a data-category="test"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer">
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
             <h2 class="text-3xl font-semibold text-white text-center">Test</h2>
 
             <div class="progress-test absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
@@ -134,6 +134,15 @@ German Vocabulary App
             </div>
         </a>
 
+        <!-- Review Mistakes -->
+        <a data-category="failed_words"
+        class="category-card relative flex items-center justify-center 
+                bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                transition cursor-pointer select-none
+                {% if failed_count == 0 %}opacity-40 cursor-not-allowed hover:scale-100 hover:shadow-none{% endif %}"
+        {% if failed_count == 0 %}data-disabled="true"{% endif %}>
+            <h2 class="text-3xl font-semibold text-white text-center">Failed Words</h2>
+        </a>
     </div>
 </div>
 

@@ -29,12 +29,41 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+    /* DARK THEME */
+    body.dark {
+        background: #0f0f0f;
+        color: white;
+    }
+
+    /* GERMAN FLAG THEME */
+    body.german {
+        background: linear-gradient(to bottom, black, red, yellow);
+        color: white;
+    }
+
+    /* CUSTOM THEME */
+    body.custom {
+        color: white;
+    }
+    </style>
+
+
     {% block extra_head %}{% endblock %}
 </head>
-<body class="min-h-screen bg-gradient-to-b from-black via-black via-red-600 to-yellow-400 text-slate-900 font-[Montserrat]">
+<body
+    class="min-h-screen font-[Montserrat] {{ settings.theme if settings else 'dark' }}"
+    {% if settings and settings.theme == 'custom' and settings.custom_color %}
+        style="background: {{ settings.custom_color }};"
+    {% endif %}
+>
+
     <div class="min-h-screen flex flex-col">
         <!-- Navbar -->
-        <header class="bg-zinc-950/0 text-white shadow">
+        <header class="bg-zinc-950/20 text-white shadow">
             <nav class="max-w-8xl mx-auto px-4 py-3 flex items-center justify-between">
                 <a href="{{ url_for('index') }}" class="flex items-center gap-2 font-semibold text-lg">
                     <img src="{{ url_for('static', filename='img/logo.png') }}"
@@ -44,18 +73,20 @@
                 </a>
                 <div class="space-x-4 text-sm">
 
-                    <a href="{{ url_for('index') }}" class="hover:underline">Home</a>
+                    <a href="{{ url_for('index') }}">Home</a>
 
                     {% if 'user_id' in session %}
                         <!-- If logged in: show username-->
-                        <a href="{{ url_for('account') }}" class="hover:underline">
+                        <a href="{{ url_for('account') }}">
                             {{ session['username'] }}
                         </a>
 
                     {% else %}
                         <!-- If not logged in: show "Log in" -->
-                        <a href="{{ url_for('login') }}" class="hover:underline">Log in</a>
+                        <a href="{{ url_for('login') }}">Log in</a>
                     {% endif %}
+
+                    <a href="/settings" class="ml-3 text-white">Settings</a>
 
                 </div>
             </nav>
@@ -75,6 +106,15 @@
                 <span>© 2025 Lutz127 • German Vocabulary App</span>
             </div>
         </footer>
+
+    <!-- Inject user settings BEFORE main.js -->
+    <script>
+    window.userSettings = {
+        speedrun: {{ 'true' if settings and settings.speedrun_enabled else 'false' }},
+        sound: {{ 'true' if settings and settings.sound_enabled else 'false' }},
+        strict: {{ 'true' if settings and settings.strict_articles else 'false' }}
+    };
+    </script>
 
     <!-- Main JS file -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

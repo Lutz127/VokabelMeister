@@ -4,10 +4,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const quizContainer = document.getElementById("quiz-container");
     const home = document.querySelector(".home-content");
 
+    fetch("/api/settings")
+    .then(res => res.json())
+    .then(s => {
+        if (s.default_mode) quizMode = s.default_mode;
+        updateModeButtons();
+    });
+
     cards.forEach(card => {
         card.addEventListener("click", async () => {
+            // Disable Failed Words card when empty
+            if (card.dataset.disabled === "true") return;
 
             const category = card.dataset.category;
+
+            // Failed Words mode
+            if (category === "failed_words") {
+                const response = await fetch("/api/failed_words");
+                let failed = await response.json();
+
+                // Convert DB rows → quiz format
+                const words = failed.map(item => ({
+                    german: item.german || "(unknown)",          // convert DB word → quiz german
+                    english: item.english || "(missing)",      // convert DB english
+                    gender: item.gender || null                // convert DB gender
+                }));
+
+                shuffle(words);
+                home.classList.add("hidden");
+                startQuiz(words, "failed_words");
+                return;  // critical: stops normal category loader
+            }
 
             // Load JSON data
             const response = await fetch(`/static/data/${category}.json`);
@@ -89,14 +116,17 @@ function normalizeGerman(str) {
 }
 
 function formatEnglishWithGender(item) {
-    // If there's no gender field → just return English word
-    if (!item.gender) return item.english;
+    // If there's no gender field → just show the FIRST English synonym
+    if (!item.gender) {
+        return item.english.split("/")[0].trim();  
+    }
 
-    // gender should be "m", "f", or "n"
+    const first = item.english.split("/")[0].trim();
     const g = item.gender.toLowerCase();
 
-    return `${item.english} (${g})`;
+    return `${first} (${g})`;
 }
+
 
 // Fake user progress until database is implemented
 // Later this will be replaced with real DB values
@@ -281,7 +311,9 @@ function startQuiz(words, category) {
                 const clone = original.cloneNode(true);
 
                 clone.volume = original.volume;   // keep same volume
-                clone.play();                     // plays instantly
+                if (window.userSettings?.sound) {
+                    clone.play();
+                }
                 lastTypeTime = now;
                 setTimeout(() => clone.remove(), 200);
             }
@@ -311,89 +343,121 @@ function startQuiz(words, category) {
         answer.disabled = true;
 
         let userInput = answer.value.trim().toLowerCase();
+
         // Choose correct answer depending on mode
         let correctRaw = (
             quizMode === "de-to-en"
                 ? words[index].english.toLowerCase()
                 : words[index].german.toLowerCase()
         );
-        let delay = 1000;
 
         // Normalize correct answers
         userInput = userInput.replace(/^to\s+/, "");
         correctRaw = correctRaw.replace(/to\s+/g, "");
         let correctList = correctRaw.split("/").map(s => s.trim());
+
         let isCorrect;
+        const articleStrict = window.userSettings?.strict === true;
 
         if (quizMode === "de-to-en") {
             // Normal English checking
             isCorrect = correctList.includes(userInput);
+
         } else {
-            // Normalize both correct & user input
-            const stripArticle = word =>
-                word.replace(/^(der|die|das)\s+/i, "");
+            if (articleStrict) {
+                // Require exact match INCLUDING article
+                const normalizedUser = normalizeGerman(userInput);
+                const normalizedCorrect = correctList.map(c =>
+                    normalizeGerman(c)
+                );
+                isCorrect = normalizedCorrect.includes(normalizedUser);
+            } else {
+                // Ignore articles (current behavior)
+                const stripArticle = word =>
+                    word.replace(/^(der|die|das)\s+/i, "");
 
-            // normalize user's answer
-            const normalizedUser = normalizeGerman(
-                stripArticle(
-                    userInput.replace(/\(.*?\)/g, "")
-                )
-            );
-
-            // normalize correct answer
-            const normalizedCorrectList = correctList.map(c =>
-                normalizeGerman(
+                const normalizedUser = normalizeGerman(
                     stripArticle(
-                        c.replace(/\(.*?\)/g, "")  // remove "(m)" or "(f)" or "(n)"
+                        userInput.replace(/\(.*?\)/g, "")
                     )
-                )
-            );
+                );
 
-            // final check
-            isCorrect = normalizedCorrectList.includes(normalizedUser);
+                const normalizedCorrect = correctList.map(c =>
+                    normalizeGerman(stripArticle(c))
+                );
+
+                isCorrect = normalizedCorrect.includes(normalizedUser);
+            }
         }
-        
+
+        // Apply styling + sounds
         if (isCorrect) {
             answer.style.color = "#36ff54ff";
             answer.style.caretColor = "#36ff54ff";
-            answer.style.outline = "none";
             answer.style.boxShadow = "0 0 0 2px #36ff54ff inset";
-
-            document.getElementById("correct-sound").play();
+            if (window.userSettings?.sound) {
+                document.getElementById("correct-sound").play();
+            }
             score++;
         } else {
             answer.style.color = "#ff1515ff";
             answer.style.caretColor = "#ff1515ff";
-            answer.style.outline = "none";
             answer.style.boxShadow = "0 0 0 2px #ff1515ff inset";
-
-            document.getElementById("wrong-sound").play();
+            if (window.userSettings?.sound) {
+                document.getElementById("wrong-sound").play();
+            }
             answer.value = correctList[0];
-            delay = 3000;
-        }
 
+            // Save failed word to backend
+            fetch("/save_failure", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    category: category,
+                    word: words[index].german,
+                    english: words[index].english,
+                    gender: words[index].gender || null
+                })
+            });
+        }
 
         index++;
 
-        if (index < words.length) {
-            setTimeout(showQuestion, delay);
+        let delay;
+
+        if (window.userSettings && window.userSettings.speedrun === true) {
+            delay = 0;  // Instant transition
         } else {
-            setTimeout(showResults, delay);
+            delay = isCorrect ? 1000 : 3000;
+        }
+
+        if (index < words.length) {
+            if (delay === 0) {
+                showQuestion();
+            } else {
+                setTimeout(showQuestion, delay);
+            }
+        } else {
+            if (delay === 0) {
+                showResults();
+            } else {
+                setTimeout(showResults, delay);
+            }
             clearInterval(timerInterval);
         }
     }
+
 
     function updateTimer() {
         let now = Date.now();
         let elapsed = (now - startTime) / 1000; // seconds
 
         let minutes = Math.floor(elapsed / 60);
-        let seconds = Math.floor(elapsed % 60);
-        let ms = Math.floor((elapsed * 10) % 10);
+        let seconds = (elapsed % 60).toFixed(2); // keep decimals properly
 
         let timerDisplay = document.getElementById("live-timer");
         if (timerDisplay) {
-            timerDisplay.textContent = `Time: ${minutes}m ${seconds}.${ms}s`;
+            timerDisplay.textContent = `Time: ${minutes}m ${seconds}s`;
         }
     }
 
@@ -405,9 +469,10 @@ function startQuiz(words, category) {
 function showResults() {
 
     let endTime = Date.now();
-    let totalTime = Math.floor((endTime - startTime) / 1000);
+    let totalTime = (endTime - startTime) / 1000; // full decimal precision
+    totalTime = Number(totalTime.toFixed(2));     // keep 2 decimals
     let minutes = Math.floor(totalTime / 60);
-    let seconds = totalTime % 60;
+    let seconds = (totalTime % 60).toFixed(2);
 
     // Save progress (percentage correct)
     const percent = Math.floor((score / words.length) * 100);
@@ -427,11 +492,34 @@ function showResults() {
         })
     });
 
+    // Save leaderboard entry
+    fetch("/save_leaderboard", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            category: category,
+            score: score,
+            time: totalTime
+        })
+    });
+
+
     document.getElementById("live-timer").classList.add("hidden");
     document.getElementById("progress-container").classList.add("hidden");
     document.getElementById("mode-de-en").classList.add("hidden");
     document.getElementById("mode-en-de").classList.add("hidden");
 
+
+    let leaderboardHTML = "";
+
+    if (category !== "failed_words") {
+        leaderboardHTML = `
+            <h3 class="text-white text-2xl font-bold mt-6">Leaderboard</h3>
+            <div id="leaderboard" class="bg-black/40 rounded-xl p-4 w-full max-w-md text-white text-center">
+                <p class="text-white/60">Loading...</p>
+            </div>
+        `;
+    }
 
     document.getElementById("quiz-content").innerHTML = `
         <div class="flex flex-col items-center gap-2">
@@ -439,12 +527,34 @@ function showResults() {
             <p class="text-white text-center text-xl">Your score: <b>${score}/${words.length}</b></p>
             <p class="text-white text-center text-lg">Time: <b>${minutes}m ${seconds}s</b></p>
 
+            ${leaderboardHTML}
+
             <button id="return-home"
-                class="mt-4 bg-yellow-400 text-black font-bold px-6 py-3 rounded-xl hover:bg-yellow-500 transition">
+                class="mt-6 bg-yellow-400 text-black font-bold px-6 py-3 rounded-xl hover:bg-yellow-500 transition">
                 Back to Home
             </button>
         </div>
     `;
+
+
+    fetch(`/api/leaderboard/${category}`)
+    .then(res => res.json())
+    .then(rows => {
+        const div = document.getElementById("leaderboard");
+
+        if (rows.length === 0) {
+            div.innerHTML = "<p class='text-white/60'>No scores yet. Be the first!</p>";
+            return;
+        }
+
+        div.innerHTML = rows.map((r, i) => `
+            <div class="flex justify-between py-1">
+                <span class="text-yellow-300">${i + 1}.</span>
+                <span>${r.username}</span>
+                <span>${r.time.toFixed(2)}s</span>
+            </div>
+        `).join("");
+    });
 
     document.getElementById("return-home").addEventListener("click", returnHome);
 }
