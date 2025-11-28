@@ -30,11 +30,11 @@
     {"german": "achtzig", "english": "eighty"},
     {"german": "neunzig", "english": "ninety"},
 
-    {"german": "hundert", "english": "one hundred"},
+    {"german": "hundert / einhundert", "english": "one hundred"},
     {"german": "zweihundert", "english": "two hundred"},
     {"german": "dreihundert", "english": "three hundred"},
     {"german": "vierhundert", "english": "four hundred"},
     {"german": "fünfhundert", "english": "five hundred"},
 
-    {"german": "tausend", "english": "one thousand"}
+    {"german": "tausend / eintausend", "english": "one thousand"}
 ]

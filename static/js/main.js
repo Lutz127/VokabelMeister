@@ -269,6 +269,8 @@ function startQuiz(words, category) {
     function showQuestion() {
         const item = words[index];
 
+        const displayGerman = item.german.split("/").map(s => s.trim())[0];
+
         document.getElementById("quiz-content").innerHTML = `
             <div class="bg-black/60 p-6 rounded-xl shadow text-center mb-4">
                 <p class="text-white text-xl mb-2">
@@ -276,7 +278,10 @@ function startQuiz(words, category) {
                 </p>
 
                 <p class="text-yellow-300 text-3xl font-bold">
-                    ${quizMode === "de-to-en" ? item.german : formatEnglishWithGender(item)}
+                    ${quizMode === "de-to-en"
+                        ? item.german.split("/")[0].trim()   // ONLY FIRST FORM
+                        : formatEnglishWithGender(item)
+                    }
                 </p>
 
             </div>
@@ -359,20 +364,20 @@ function startQuiz(words, category) {
         let isCorrect;
         const articleStrict = window.userSettings?.strict === true;
 
-        if (quizMode === "de-to-en") {
-            // Normal English checking
-            isCorrect = correctList.includes(userInput);
+        if (quizMode === "en-to-de") {
 
-        } else {
+            let germanForms = correctList; // already split
+
             if (articleStrict) {
-                // Require exact match INCLUDING article
+                // strict: full match including article
                 const normalizedUser = normalizeGerman(userInput);
-                const normalizedCorrect = correctList.map(c =>
+                const normalizedCorrect = germanForms.map(c =>
                     normalizeGerman(c)
                 );
                 isCorrect = normalizedCorrect.includes(normalizedUser);
+
             } else {
-                // Ignore articles (current behavior)
+                // non-strict: strip articles + normalize
                 const stripArticle = word =>
                     word.replace(/^(der|die|das)\s+/i, "");
 
@@ -382,12 +387,18 @@ function startQuiz(words, category) {
                     )
                 );
 
-                const normalizedCorrect = correctList.map(c =>
-                    normalizeGerman(stripArticle(c))
+                const normalizedCorrect = germanForms.map(c =>
+                    normalizeGerman(
+                        stripArticle(
+                            c.replace(/\(.*?\)/g, "")
+                        )
+                    )
                 );
 
                 isCorrect = normalizedCorrect.includes(normalizedUser);
             }
+        } else {
+            isCorrect = correctList.includes(userInput);
         }
 
         // Apply styling + sounds
