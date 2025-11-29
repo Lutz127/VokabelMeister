@@ -10,3 +10,5 @@ env/
 .idea/
 .vscode/
 static/uploads/
+sqlite3.exe
+*.exe
