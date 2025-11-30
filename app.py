@@ -697,9 +697,8 @@ def upload_avatar():
 
     # Store only the filename
     db = get_db()
-    rel_path = f"uploads/{filename}"
     execute(db, "UPDATE users SET avatar = %s WHERE id = %s",
-            (rel_path, session["user_id"]))
+            (filename, session["user_id"]))
     db.commit()
 
     flash("Profile picture updated!")
