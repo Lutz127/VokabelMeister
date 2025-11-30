@@ -443,7 +443,7 @@ This required splitting answers, trimming whitespace, normalizing case, and chec
 
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/14592b4c-8965-4770-9ba9-9189d7975e2a" />
 
-## AI Assistance Notice
+## CS50 AI Assistance Notice
 
 Portions of this project were developed with the assistance of AI tools (ChatGPT) for guidance, debugging, and explanations.
 All final decisions, architecture, and code were written and implemented by me.
