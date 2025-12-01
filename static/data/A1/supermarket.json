@@ -1,0 +1,18 @@
+[
+    {"german": "der Supermarkt", "plural": "die Supermärkte", "english": "supermarket", "example": "Der Supermarkt ist groß."},
+    {"german": "das Geschäft / der Laden", "plural": "die Geschäfte / die Läden", "english": "shop / store", "example": "Das Geschäft ist geöffnet."},
+    {"german": "das Angebot", "plural": "die Angebote", "english": "deal / offer", "example": "Das Angebot ist günstig."},
+    {"german": "der Einkauf / die Einkäufe", "plural": "die Einkäufe", "english": "shopping / groceries", "example": "Ich mache den Einkauf."},
+    {"german": "der Einkaufswagen / der Wagen", "plural": "die Einkaufswagen / die Wagen", "english": "shopping cart", "example": "Ich nehme einen Einkaufswagen."},
+    {"german": "der Korb / der Einkaufskorb", "plural": "die Körbe / die Einkaufskörbe", "english": "basket", "example": "Der Korb ist voll."},
+    {"german": "die Kasse", "plural": "die Kassen", "english": "checkout / register", "example": "Ich warte an der Kasse."},
+    {"german": "der Kassierer", "plural": "die Kassierer", "english": "cashier", "example": "Der Kassierer ist freundlich."},
+    {"german": "der Preis / die Kosten", "plural": "die Preise / die Kosten", "english": "price / cost", "example": "Der Preis ist zu hoch."},
+    {"german": "der Rabatt", "plural": "die Rabatte", "english": "discount", "example": "Es gibt heute einen Rabatt."},
+    {"german": "die Tüte / die Plastiktüte", "plural": "die Tüten / die Plastiktüten", "english": "bag / plastic bag", "example": "Ich brauche eine Tüte."},
+    {"german": "die Abteilung", "plural": "die Abteilungen", "english": "section / department", "example": "Die Obstabteilung ist links."},
+    {"german": "die Bäckerei", "plural": "die Bäckereien", "english": "bakery", "example": "Die Bäckerei macht um 7 Uhr auf."},
+    {"german": "die Fleischerei / die Metzgerei", "plural": "die Fleischereien / die Metzgereien", "english": "butcher shop", "example": "Die Fleischerei ist geschlossen."},
+    {"german": "die Kasse / der Kassenbereich", "plural": "die Kassen / die Kassenbereiche", "english": "checkout area", "example": "Der Kassenbereich ist vorne."},
+    {"german": "die Quittung / der Kassenzettel", "plural": "die Quittungen / die Kassenzettel", "english": "receipt", "example": "Ich nehme die Quittung mit."}
+]

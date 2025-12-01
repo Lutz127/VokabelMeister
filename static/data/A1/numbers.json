@@ -1,0 +1,40 @@
+[
+    {"german": "null", "english": "zero", "example": "Die Zahl ist null."},
+    {"german": "eins", "english": "one", "example": "Ich habe eins."},
+    {"german": "zwei", "english": "two", "example": "Ich habe zwei Bücher."},
+    {"german": "drei", "english": "three", "example": "Ich sehe drei Hunde."},
+    {"german": "vier", "english": "four", "example": "Ich habe vier Stifte."},
+    {"german": "fünf", "english": "five", "example": "Ich brauche fünf Minuten."},
+    {"german": "sechs", "english": "six", "example": "Ich habe sechs Äpfel."},
+    {"german": "sieben", "english": "seven", "example": "Ich sehe sieben Leute."},
+    {"german": "acht", "english": "eight", "example": "Der Bus kommt um acht."},
+    {"german": "neun", "english": "nine", "example": "Ich habe neun Euro."},
+    {"german": "zehn", "english": "ten", "example": "Ich zähle bis zehn."},
+    {"german": "elf", "english": "eleven", "example": "Ich sehe elf Sterne."},
+    {"german": "zwölf", "english": "twelve", "example": "Wir sind zwölf Personen."},
+
+    {"german": "dreizehn", "english": "thirteen", "example": "Ich bin dreizehn Jahre alt."},
+    {"german": "vierzehn", "english": "fourteen", "example": "Er ist vierzehn."},
+    {"german": "fünfzehn", "english": "fifteen", "example": "Sie ist fünfzehn Jahre alt."},
+    {"german": "sechzehn", "english": "sixteen", "example": "Ich kenne sechzehn Wörter."},
+    {"german": "siebzehn", "english": "seventeen", "example": "Er ist siebzehn."},
+    {"german": "achtzehn", "english": "eighteen", "example": "Ich bin achtzehn."},
+    {"german": "neunzehn", "english": "nineteen", "example": "Wir sind neunzehn Schüler."},
+
+    {"german": "zwanzig", "english": "twenty", "example": "Ich habe zwanzig Euro."},
+    {"german": "dreißig", "english": "thirty", "example": "Das kostet dreißig Euro."},
+    {"german": "vierzig", "english": "forty", "example": "Er ist vierzig Jahre alt."},
+    {"german": "fünfzig", "english": "fifty", "example": "Fünfzig Leute sind hier."},
+    {"german": "sechzig", "english": "sixty", "example": "Das Haus ist sechzig Jahre alt."},
+    {"german": "siebzig", "english": "seventy", "example": "Sie ist siebzig."},
+    {"german": "achtzig", "english": "eighty", "example": "Die Stadt ist achtzig Kilometer entfernt."},
+    {"german": "neunzig", "english": "ninety", "example": "Es sind neunzig Schüler."},
+
+    {"german": "hundert / einhundert", "english": "one hundred", "example": "Hundert Menschen sind da."},
+    {"german": "zweihundert", "english": "two hundred", "example": "Das kostet zweihundert Euro."},
+    {"german": "dreihundert", "english": "three hundred", "example": "Es sind dreihundert Autos."},
+    {"german": "vierhundert", "english": "four hundred", "example": "Vierhundert Leute feiern."},
+    {"german": "fünfhundert", "english": "five hundred", "example": "Das Gebäude ist fünfhundert Jahre alt."},
+
+    {"german": "tausend / eintausend", "english": "one thousand", "example": "Tausend Menschen leben hier."}
+]

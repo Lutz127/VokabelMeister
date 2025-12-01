@@ -9,130 +9,88 @@ German Vocabulary App
 <!-- HOMEPAGE CONTENT -->
 <div class="home-content text-center max-w-5xl mx-auto px-2">
 
-    <h1 class="text-5xl font-bold mb-8 text-white">Choose a category</h1>
+    <h1 class="text-5xl font-bold mb-8 text-white">Basics</h1>
 
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <!-- Basics -->
-        <a href="/a1/basics"
+        <a data-level="A1" data-category="colors"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Basics</h2>
+            <h2 class="text-3xl font-semibold text-white text-center">Colors</h2>
 
-            <div class="progress-a1_basics absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+            <div class="progress-colors absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
                 <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
             </div>
         </a>
 
-        <!-- Grammar Basics -->
-        <a href="/a1/grammar_basics"
+        <a data-level="A1" data-category="numbers"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Grammar Basics</h2>
+            <h2 class="text-3xl font-semibold text-white text-center">Numbers</h2>
 
-            <div class="progress-a1_grammar_basics absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+            <div class="progress-numbers absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
                 <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
             </div>
         </a>
 
-        <!-- People & Daily Life -->
-        <a href="/a1/people_daily_life"
+        <a data-level="A1" data-category="time"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-2xl font-semibold text-white text-center">People & Daily Life</h2>
+            <h2 class="text-3xl font-semibold text-white text-center">Time & Dates</h2>
 
-            <div class="progress-a1_people_daily_life absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+            <div class="progress-time absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
                 <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
             </div>
         </a>
 
-        <!-- Objects & Things -->
-        <a href="/a1/objects_things"
+        <a data-level="A1" data-category="countries_languages"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Objects & Things</h2>
+            <h2 class="text-[1.20rem] font-semibold text-white text-center">Countries & Languages</h2>
 
-            <div class="progress-a1_object_things absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+            <div class="progress-countries_languages absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
                 <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
             </div>
         </a>
 
-        <!-- Nature & Environment -->
-        <a href="/a1/environment"
+        <a data-level="A1" data-category="directions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Environment</h2>
+            <h2 class="text-3xl font-semibold text-white text-center">Directions</h2>
 
-            <div class="progress-a1_nature_environment absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+            <div class="progress-directions absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
                 <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
             </div>
         </a>
 
-        <!-- Verbs -->
-        <a href="/a1/verbs"
+        <a data-level="A1" data-category="basic_phrases"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Verbs</h2>
+            <h2 class="text-3xl font-semibold text-white text-center">Basic Phrases</h2>
 
-            <div class="progress-a1_verbs absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+            <div class="progress-basic_phrases absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
                 <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
             </div>
         </a>
 
-        <!-- Adjectives -->
-        <a href="/a1/adjectives"
+        <a data-level="A1" data-category="communication"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Adjectives</h2>
+            <h2 class="text-3xl font-semibold text-white text-center">Communication</h2>
 
-            <div class="progress-a1_adjectives absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+            <div class="progress-communication absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
                 <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
             </div>
         </a>
 
-        <!-- Review Mistakes -->
-        <a 
-            id="failed-words-card"
-            data-category="failed_words"
-            class="category-card relative flex items-center justify-center 
-                bg-black/70 shadow rounded-xl p-5 overflow-hidden
-                hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-
-            <h2 class="text-3xl font-semibold text-white text-center">Failed Words</h2>
-        </a>
-
-
-        <!-- Marathon -->
-        <a href="/a1/marathon"
-           class="category-card relative flex items-center justify-center 
-                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Marathon</h2>
-
-            <div class="progress-a1_marathon absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
-                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
-            </div>
-        </a>
-
-        <!-- Test -->
-        <a data-level="A1" data-category="test"
-           class="category-card relative flex items-center justify-center 
-                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-3xl font-semibold text-white text-center">Test</h2>
-
-            <div class="progress-test absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
-                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
-            </div>
-        </a>
     </div>
 </div>
 
@@ -168,7 +126,6 @@ German Vocabulary App
             class="w-full mb-4 bg-black/40 text-white px-4 py-2 rounded-lg hover:bg-black/60 transition font-bold">
             Go Back
         </button>
-
     </div>
 </div>
 

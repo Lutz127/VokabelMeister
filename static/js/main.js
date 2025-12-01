@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const quizContainer = document.getElementById("quiz-container");
     const home = document.querySelector(".home-content");
 
+    // Load user settings
     fetch("/api/settings")
     .then(res => res.json())
     .then(s => {
@@ -11,39 +12,62 @@ document.addEventListener("DOMContentLoaded", () => {
         updateModeButtons();
     });
 
+    // Disable/enable Failed Words card based on count
+    fetch("/api/failed_words_count")
+        .then(res => res.json())
+        .then(data => {
+            const card = document.getElementById("failed-words-card");
+            if (!card) return;
+
+            if (data.count === 0) {
+                card.dataset.disabled = "true";
+                card.classList.add("opacity-40", "cursor-not-allowed");
+                card.classList.remove("hover:scale-[1.05]", "hover:shadow-xl");
+            } else {
+                card.dataset.disabled = "false";
+                card.classList.remove("opacity-40", "cursor-not-allowed");
+                card.classList.add("hover:scale-[1.05]", "hover:shadow-xl");
+            }
+        });
+
+    // CATEGORY CLICK HANDLER
     cards.forEach(card => {
         card.addEventListener("click", async () => {
-            // Disable Failed Words card when empty
+
+            // Disabled Failed Words card
             if (card.dataset.disabled === "true") return;
 
             const category = card.dataset.category;
 
-            // Failed Words mode
+            // Special case: Failed Words mode
             if (category === "failed_words") {
                 const response = await fetch("/api/failed_words");
-                let failed = await response.json();
+                const failed = await response.json();
 
-                // Convert DB rows → quiz format
                 const words = failed.map(item => ({
-                    german: item.german || "(unknown)",          // convert DB word → quiz german
-                    english: item.english || "(missing)",      // convert DB english
-                    gender: item.gender || null                // convert DB gender
+                    german: item.german || "(unknown)",
+                    english: item.english || "(missing)",
+                    gender: item.gender || null
                 }));
 
                 shuffle(words);
                 home.classList.add("hidden");
                 startQuiz(words, "failed_words");
-                return;  // critical: stops normal category loader
+                return;
             }
 
-            // Load JSON data
-            const response = await fetch(`/static/data/${category}.json`);
+            // NORMAL CATEGORY (A1, A2, ...)
+            const level = card.dataset.level;
+
+            const response = await fetch(`/static/data/${level}/${category}.json`);
+            if (!response.ok) {
+                console.error("JSON file missing:", level, category);
+                return;
+            }
+
             const words = await response.json();
 
-            // Shuffle the questions
             shuffle(words);
-
-            // Hide homepage
             home.classList.add("hidden");
 
             startQuiz(words, category);
@@ -58,21 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
         deButton.addEventListener("click", () => {
             quizMode = "de-to-en";
             updateModeButtons();
-
-            // redraw current question if a quiz is running
             if (currentRedrawQuestion) currentRedrawQuestion();
         });
 
         enButton.addEventListener("click", () => {
             quizMode = "en-to-de";
             updateModeButtons();
-
-            // redraw current question if a quiz is running
             if (currentRedrawQuestion) currentRedrawQuestion();
         });
     }
 });
-
 // Shuffles JSON file
 
 function shuffle(array) {
@@ -113,42 +132,60 @@ function normalizeGerman(str) {
         .replace(/ö/g, "o")
         .replace(/ü/g, "u")
         .replace(/ß/g, "ss")
+        .replace(/\?/g, "")
+        .replace(/\(.*?\)/g, "")
+        .replace(/\'/g, "");
 }
 
 function formatEnglishWithGender(item) {
-    // If there's no gender field → just show the FIRST English synonym
-    if (!item.gender) {
-        return item.english.split("/")[0].trim();  
+    // Show the full English definition with parentheses
+    let englishFull = item.english.split("/")[0].trim();
+
+    if (item.gender) {
+        const g = item.gender.toLowerCase();
+        return `${englishFull} (${g})`;
     }
-
-    const first = item.english.split("/")[0].trim();
-    const g = item.gender.toLowerCase();
-
-    return `${first} (${g})`;
+    return englishFull;
 }
 
 
-// Fake user progress until database is implemented
-// Later this will be replaced with real DB values
 const userProgress = JSON.parse(localStorage.getItem("userProgress")) || {
-    a1_verbs: 0,
-    a1_adjectives: 0,
-    colors: 0,
-    numbers: 0,
-    time: 0,
-    clothing: 0,
-    family: 0,
-    weather: 0,
-    jobs: 0,
-    test: 0
+    animals: 0, basic_phrases: 0, body: 0, city_places: 0, clothing: 0, colors: 0, common_adjectives: 0, common_verbs: 0, communication: 0, condition: 0, conversation_particles: 0,
+    countries_languages: 0, daily_activities: 0, daily_routine_nouns: 0, demonstratives: 0, directions: 0, everyday_objects: 0, family: 0, feelings: 0, food_drinks: 0, geography_basics: 0, hobbies_free_time: 0, home_furniture: 0, household_items: 0,
+    media_technology: 0, modal_verbs: 0, nature: 0, negation: 0, numbers: 0, people_descriptions: 0, possessive_pronouns: 0, prepositions: 0, pronouns: 0, quantifiers: 0, school_work_verbs: 0, school: 0,
+    sizes_measurements: 0, supermarket: 0, taste: 0, temperatures: 0, test: 0, time: 0, time_expressions: 0, toys: 0, transport_verbs: 0, transport: 0, w_questions: 0, weather: 0, work_jobs: 0
 };
 
-// Apply progress to homepage bars
+const categoryGroups = {
+    basics: [
+        "colors",
+        "numbers",
+        "time",
+        "countries_languages",
+        "directions",
+        "basic_phrases",
+        "communication"
+    ],
+    grammar_basics: [
+        "w_questions",
+        "prepositions",
+        "pronouns",
+        "conversation_particles",
+        "negation",
+        "time_expressions",
+        "possesive_pronouns",
+        "demonstratives",
+        "quantifiers"
+    ]
+};
+
 function updateCategoryProgressBars() {
+
     for (const [category, percent] of Object.entries(userProgress)) {
+
         const outer = document.querySelector(`.progress-${category}`);
         const inner = outer?.querySelector('.progress-inner');
-        if (!inner) continue;
+        if (!inner) continue;   // not on this page
 
         inner.style.width = percent + "%";
 
@@ -158,12 +195,54 @@ function updateCategoryProgressBars() {
         else if (percent < 60) color = "#f7bf46ff";
         else if (percent < 80) color = "#daf746ff";
         else if (percent < 99) color = "#63de4aff";
-        else if (percent >= 99) color = "#36ff54ff"; 
+        else if (percent >= 99) color = "#36ff54ff";
 
         inner.style.backgroundColor = color;
 
-        // Glow only when > 99%
         if (percent >= 99) {
+            outer.classList.add("pulse-glow");
+        } else {
+            outer.classList.remove("pulse-glow");
+        }
+    }
+
+    for (const [mainCategory, subcats] of Object.entries(categoryGroups)) {
+
+        const outer = document.querySelector(`.progress-${mainCategory}`);
+        if (!outer) continue;  // not on this page
+
+        const inner = outer.querySelector(".progress-inner");
+        if (!inner) continue;
+
+        // Sum progress values of all subcategories
+        let total = 0;
+        let count = 0;
+
+        for (const sub of subcats) {
+            if (userProgress[sub] !== undefined) {
+                total += userProgress[sub];
+                count++;
+            }
+        }
+
+        // If no subcategories found, set to 0
+        const avg = count > 0 ? total / count : 0;
+
+        // Fill bar
+        inner.style.width = avg + "%";
+
+        // Apply same color logic
+        let color = "#ff3b3b";
+        if (avg < 20) color = "#ff3b3b";
+        else if (avg < 40) color = "#f79046ff";
+        else if (avg < 60) color = "#f7bf46ff";
+        else if (avg < 80) color = "#daf746ff";
+        else if (avg < 99) color = "#63de4aff";
+        else if (avg >= 99) color = "#36ff54ff";
+
+        inner.style.backgroundColor = color;
+
+        if (avg >= 99) {
             outer.classList.add("pulse-glow");
         } else {
             outer.classList.remove("pulse-glow");
@@ -279,10 +358,15 @@ function startQuiz(words, category) {
 
                 <p class="text-yellow-300 text-3xl font-bold">
                     ${quizMode === "de-to-en"
-                        ? item.german.split("/")[0].trim()   // ONLY FIRST FORM
+                        ? item.german.split("/")[0].trim()
                         : formatEnglishWithGender(item)
                     }
                 </p>
+
+                ${quizMode === "de-to-en" && window.userSettings?.show_examples && item.example
+                    ? `<p class="text-gray-300 text-sm italic mt-2">"${item.example}"</p>`
+                    : ""
+                }
 
             </div>
 
@@ -358,8 +442,25 @@ function startQuiz(words, category) {
 
         // Normalize correct answers
         userInput = userInput.replace(/^to\s+/, "");
+        userInput = userInput.replace(/\?/g, "");
+        userInput = userInput.replace(/\(.*?\)/g, "");
+
         correctRaw = correctRaw.replace(/to\s+/g, "");
+        correctRaw = correctRaw.replace(/\?/g, "");
+        correctRaw = correctRaw.replace(/\(.*?\)/g, "");
+
         let correctList = correctRaw.split("/").map(s => s.trim());
+
+        // If plural mode is enabled AND we are in English → German mode
+        if (quizMode === "en-to-de" && window.userSettings?.plurals === true) {
+            // If the item has a plural field in JSON
+            if (words[index].plural) {
+                correctList = words[index].plural
+                    .toLowerCase()
+                    .split("/")
+                    .map(s => s.trim());
+            }
+        }
 
         let isCorrect;
         const articleStrict = window.userSettings?.strict === true;
@@ -477,7 +578,9 @@ function startQuiz(words, category) {
         document.getElementById("progress-bar").style.width = `${progress}%`;
     }
 
-function showResults() {
+async function showResults() {
+
+    document.getElementById("quiz-back-button")?.classList.add("hidden");
 
     let endTime = Date.now();
     let totalTime = (endTime - startTime) / 1000; // full decimal precision
@@ -492,8 +595,8 @@ function showResults() {
     // Store in localStorage
     localStorage.setItem("userProgress", JSON.stringify(userProgress));
 
-    // Send the score + time to the backend
-    fetch("/save_score", {
+    // Save the score
+    await fetch("/save_score", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -503,8 +606,8 @@ function showResults() {
         })
     });
 
-    // Save leaderboard entry
-    fetch("/save_leaderboard", {
+    // Save leaderboard entry (wait for completion)
+    await fetch("/save_leaderboard", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -513,6 +616,7 @@ function showResults() {
             time: totalTime
         })
     });
+
 
 
     document.getElementById("live-timer").classList.add("hidden");
@@ -569,5 +673,10 @@ function showResults() {
 
     document.getElementById("return-home").addEventListener("click", returnHome);
 }
+document.addEventListener("click", function (e) {
+    if (e.target.id === "quiz-back-button") {
+        returnHome();
+    }
+});
     showQuestion();
 }

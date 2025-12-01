@@ -1,0 +1,13 @@
+[
+    {"german": "viel", "english": "much / a lot", "example": "Ich habe viel Arbeit."},
+    {"german": "viele", "english": "many", "example": "Viele Leute sind hier."},
+    {"german": "wenig", "english": "little / few", "example": "Ich habe wenig Zeit."},
+    {"german": "mehr", "english": "more", "example": "Ich möchte mehr Wasser."},
+    {"german": "weniger", "english": "less / fewer", "example": "Ich brauche weniger Zucker."},
+    {"german": "genug", "english": "enough", "example": "Das ist genug."},
+    {"german": "mehrere", "english": "several", "example": "Mehrere Personen warten."},
+    {"german": "ein paar", "english": "a few / a couple", "example": "Ich habe ein paar Fragen."},
+    {"german": "manche", "english": "some", "example": "Manche Menschen mögen Kaffee."},
+    {"german": "alles", "english": "everything", "example": "Alles ist gut."},
+    {"german": "nichts", "english": "nothing", "example": "Ich sehe nichts."}
+]

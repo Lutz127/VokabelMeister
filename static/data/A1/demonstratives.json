@@ -1,0 +1,10 @@
+[
+    {"german": "mein", "english": "my", "example": "Das ist mein Buch."},
+    {"german": "dein", "english": "your (informal singular)", "example": "Ist das dein Stift?"},
+    {"german": "sein", "english": "his", "example": "Das ist sein Auto."},
+    {"german": "ihr", "english": "her", "example": "Das ist ihr Hund."},
+    {"german": "unser", "english": "our", "example": "Unser Haus ist groß."},
+    {"german": "euer", "english": "your (informal plural)", "example": "Ist das euer Lehrer?"},
+    {"german": "ihr", "english": "their", "example": "Das ist ihr Zimmer."},
+    {"german": "Ihr", "english": "your (formal)", "example": "Ist das Ihr Pass?"}
+]

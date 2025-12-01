@@ -1,0 +1,21 @@
+[
+    {"german": "der Baum", "plural": "die Bäume", "english": "tree", "example": "Der Baum ist hoch."},
+    {"german": "die Blume", "plural": "die Blumen", "english": "flower", "example": "Die Blume ist schön."},
+    {"german": "die Pflanze", "plural": "die Pflanzen", "english": "plant", "example": "Die Pflanze braucht Wasser."},
+    {"german": "das Blatt", "plural": "die Blätter", "english": "leaf", "example": "Das Blatt ist grün."},
+    {"german": "das Gras", "plural": "die Gräser", "english": "grass", "example": "Das Gras ist nass."},
+    {"german": "der Wald", "plural": "die Wälder", "english": "forest / woods", "example": "Der Wald ist ruhig."},
+    {"german": "der Berg", "plural": "die Berge", "english": "mountain", "example": "Der Berg ist sehr hoch."},
+    {"german": "das Tal", "plural": "die Täler", "english": "valley", "example": "Das Tal ist breit."},
+    {"german": "der See", "plural": "die Seen", "english": "lake", "example": "Der See ist klar."},
+    {"german": "der Fluss", "plural": "die Flüsse", "english": "river", "example": "Der Fluss fließt schnell."},
+    {"german": "das Meer", "plural": "die Meere", "english": "sea", "example": "Das Meer ist blau."},
+    {"german": "der Ozean", "plural": "die Ozeane", "english": "ocean", "example": "Der Ozean ist tief."},
+    {"german": "der Himmel", "plural": "die Himmel", "english": "sky", "example": "Der Himmel ist wolkig."},
+    {"german": "die Sonne", "plural": "die Sonnen", "english": "sun", "example": "Die Sonne scheint."},
+    {"german": "der Mond", "plural": "die Monde", "english": "moon", "example": "Der Mond ist hell."},
+    {"german": "der Stern", "plural": "die Sterne", "english": "star", "example": "Der Stern leuchtet."},
+    {"german": "der Stein / der Fels", "plural": "die Steine / die Felsen", "english": "stone / rock", "example": "Der Stein ist schwer."},
+    {"german": "der Sand", "plural": "die Sände", "english": "sand", "example": "Der Sand ist warm."},
+    {"german": "der Wind", "plural": "die Winde", "english": "wind", "example": "Der Wind ist stark."}
+]

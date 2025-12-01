@@ -1,0 +1,9 @@
+[
+    {"german": "können", "english": "can / to be able to", "example": "Ich kann Deutsch sprechen."},
+    {"german": "müssen", "english": "must / to have to", "example": "Ich muss arbeiten."},
+    {"german": "dürfen", "english": "may / to be allowed to", "example": "Ich darf hier parken."},
+    {"german": "wollen", "english": "to want", "example": "Ich will etwas essen."},
+    {"german": "sollen", "english": "should / ought to", "example": "Ich soll mehr lernen."},
+    {"german": "mögen", "english": "to like", "example": "Ich mag Kaffee."},
+    {"german": "möchten", "english": "would like", "example": "Ich möchte ein Wasser."}
+]

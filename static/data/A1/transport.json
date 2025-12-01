@@ -1,0 +1,19 @@
+[
+    {"german": "der Bus / der Linienbus", "plural": "die Busse / die Linienbusse", "english": "bus", "example": "Der Bus kommt in fünf Minuten."},
+    {"german": "die Straßenbahn / die Tram", "plural": "die Straßenbahnen / die Trams", "english": "tram / streetcar", "example": "Die Straßenbahn ist schnell."},
+    {"german": "die U-Bahn / die Metro", "plural": "die U-Bahnen / die Metros", "english": "subway / metro", "example": "Ich nehme die U-Bahn zur Arbeit."},
+    {"german": "der Zug / die Bahn", "plural": "die Züge / die Bahnen", "english": "train", "example": "Der Zug ist verspätet."},
+    {"german": "der Bahnhof", "plural": "die Bahnhöfe", "english": "train station", "example": "Der Bahnhof ist groß."},
+    {"german": "die Bushaltestelle / die Haltestelle", "plural": "die Bushaltestellen / die Haltestellen", "english": "bus stop", "example": "Ich warte an der Bushaltestelle."},
+    {"german": "das Auto / der Wagen", "plural": "die Autos / die Wagen", "english": "car / automobile", "example": "Mein Auto ist kaputt."},
+    {"german": "das Fahrrad / das Rad", "plural": "die Fahrräder / die Räder", "english": "bicycle / bike", "example": "Ich fahre gern Fahrrad."},
+    {"german": "das Taxi", "plural": "die Taxis", "english": "taxi", "example": "Wir nehmen ein Taxi zum Flughafen."},
+    {"german": "das Flugzeug", "plural": "die Flugzeuge", "english": "airplane", "example": "Das Flugzeug landet pünktlich."},
+    {"german": "der Flughafen", "plural": "die Flughäfen", "english": "airport", "example": "Der Flughafen ist weit weg."},
+    {"german": "die Fahrkarte / das Ticket", "plural": "die Fahrkarten / die Tickets", "english": "ticket", "example": "Ich kaufe eine Fahrkarte nach Hamburg."},
+    {"german": "die Linie / die Route", "plural": "die Linien / die Routen", "english": "line / route", "example": "Welche Linie fährt zum Zentrum?"},
+    {"german": "die Richtung", "plural": "die Richtungen", "english": "direction", "example": "In welche Richtung geht der Bus?"},
+    {"german": "abfahren / losfahren", "english": "to depart / to leave", "example": "Wir fahren jetzt los."},
+    {"german": "ankommen / eintreffen", "english": "to arrive", "example": "Der Zug trifft um 10 Uhr ein."},
+    {"german": "reisen", "english": "to travel", "example": "Ich reise gern in andere Länder."}
+]

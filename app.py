@@ -57,6 +57,39 @@ def get_db():
             g.db.execute("PRAGMA foreign_keys = ON")
     return g.db
 
+
+def resolve_category_key(raw_cat):
+    """Resolve a raw category string (from client/DB) to a key present in
+    CATEGORY_SIZES. Handles variants like 'colors', 'a1_colors', 'A1_colors',
+    and is case-insensitive. Returns the matching key from CATEGORY_SIZES or
+    None if no match found.
+    """
+    if not raw_cat:
+        return None
+
+    # direct match
+    if raw_cat in CATEGORY_SIZES:
+        return raw_cat
+
+    # case-insensitive direct match
+    lower_raw = raw_cat.lower()
+    for k in CATEGORY_SIZES:
+        if k.lower() == lower_raw:
+            return k
+
+    # suffix match: e.g., 'A1_colors' endswith '_colors'
+    for k in CATEGORY_SIZES:
+        if k.lower().endswith("_" + lower_raw):
+            return k
+
+    # try common prefix 'A1_'
+    candidate = f"A1_{raw_cat}"
+    for k in CATEGORY_SIZES:
+        if k.lower() == candidate.lower():
+            return k
+
+    return None
+
 def calculate_level(xp):
     level = int((xp / 100) ** 0.7) + 1
     return max(level, 1)
@@ -111,7 +144,7 @@ def close_db(exception):
     if db is not None:
         db.close()
 
-@app.route("/")
+@app.route("/a1")
 def index():
     db = get_db()
 
@@ -126,6 +159,74 @@ def index():
         failed_count = 0
 
     return render_template("index.html", failed_count=failed_count)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+@app.route("/a1/basics")
+def a1_basics():
+    return render_template("a1_basics.html", category="basics")
+
+@app.route("/a1/grammar_basics")
+def a1_grammar_basics():
+    return render_template("a1_grammar_basics.html", category="grammar_basics")
+
+@app.route("/a1/people_daily_life")
+def a1_people_daily_life():
+    return render_template("a1_people_daily_life.html", category="people_daily_life")
+
+@app.route("/a1/objects_things")
+def a1_objects_things():
+    return render_template("a1_objects_things.html", category="objects_things")
+
+@app.route("/a1/environment")
+def a1_environment():
+    return render_template("a1_environment.html", category="environment")
+
+@app.route("/a1/verbs")
+def a1_verbs():
+    return render_template("a1_verbs.html", category="verbs")
+
+@app.route("/a1/adjectives")
+def a1_adjectives():
+    return render_template("a1_adjectives.html", category="adjectives")
+
+@app.route("/a1/marathon")
+def marathon():
+    return render_template("a1_marathon.html")
+
+@app.route("/api/progress")
+def api_progress():
+    if "user_id" not in session:
+        return jsonify({})
+
+    db = get_db()
+    
+    rows = execute(db, """
+        SELECT category, best_score
+        FROM scores
+        WHERE user_id = %s
+    """, (session["user_id"],)).fetchall()
+
+    result = {}
+    for row in rows:
+        raw_cat = row["category"]  # example: "a1_colors" or "colors"
+
+        # produce a cleaned key for the front-end (no a1_ prefix)
+        cleaned = raw_cat.lower().replace("a1_", "")
+
+        # resolve the stored category to the canonical key in CATEGORY_SIZES
+        key = resolve_category_key(raw_cat) or raw_cat
+
+        total_words = CATEGORY_SIZES.get(key, 0)
+        best_score = row.get("best_score") or 0
+        if total_words == 0:
+            result[cleaned] = 0
+        else:
+            result[cleaned] = int((best_score / total_words) * 100)
+
+    return jsonify(result)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -245,7 +346,9 @@ def save_score():
     # XP system
 
     # category size from preloaded dictionary
-    total_words = CATEGORY_SIZES.get(category, 1)
+    # resolve category to canonical key (e.g., 'colors' -> 'A1_colors')
+    resolved_key = resolve_category_key(category) or category
+    total_words = CATEGORY_SIZES.get(resolved_key, 1)
     percent = int((score / total_words) * 100)
 
     # speed bonus
@@ -423,6 +526,8 @@ def settings():
         custom_color = request.form.get("custom_color")
         speedrun = bool(request.form.get("speedrun"))
         strict = bool(request.form.get("strict_articles"))
+        show_examples = bool(request.form.get("show_examples"))
+        plurals = bool(request.form.get("plurals"))
 
         # only keep custom_color when theme = custom
         if theme != "custom":
@@ -430,16 +535,18 @@ def settings():
 
         # INSERT or UPDATE
         execute(db, """
-            INSERT INTO user_settings (user_id, theme, sound_enabled, custom_color, speedrun_enabled, strict_articles)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            INSERT INTO user_settings (user_id, theme, sound_enabled, custom_color, speedrun_enabled, strict_articles, show_examples, plurals)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (user_id)
             DO UPDATE SET
                 theme = EXCLUDED.theme,
                 sound_enabled = EXCLUDED.sound_enabled,
                 custom_color = EXCLUDED.custom_color,
                 speedrun_enabled = EXCLUDED.speedrun_enabled,
-                strict_articles = EXCLUDED.strict_articles
-        """, (session["user_id"], theme, sound, custom_color, speedrun, strict))
+                strict_articles = EXCLUDED.strict_articles,
+                show_examples = EXCLUDED.show_examples,
+                plurals = EXCLUDED.plurals
+        """, (session["user_id"], theme, sound, custom_color, speedrun, strict, show_examples, plurals))
 
         db.commit()
         flash("Settings updated!")
@@ -455,8 +562,8 @@ def settings():
         execute(db, """
             INSERT INTO user_settings (
                 user_id, theme, sound_enabled, custom_color,
-                speedrun_enabled, strict_articles
-            ) VALUES (%s, 'german', TRUE, NULL, FALSE, FALSE)
+                speedrun_enabled, strict_articles, show_examples, plurals
+            ) VALUES (%s, 'german', TRUE, NULL, FALSE, FALSE, TRUE, FALSE)
         """, (session["user_id"],))
         db.commit()
 
@@ -488,7 +595,9 @@ def inject_settings():
             "sound_enabled": True,
             "strict_articles": False,
             "speedrun_enabled": False,
-            "custom_color": None
+            "custom_color": None,
+            "show_examples": True,
+            "plurals": False
         }}
 
     db = get_db()
@@ -504,7 +613,9 @@ def inject_settings():
             "sound_enabled": True,
             "strict_articles": False,
             "speedrun_enabled": False,
-            "custom_color": None
+            "custom_color": None,
+            "show_examples": True,
+            "plurals": False
         }}
 
     return {"settings": s}
@@ -518,8 +629,10 @@ def save_leaderboard():
     category = data["category"]
     score = data["score"]
     time = data["time"]
+    resolved_key = resolve_category_key(category) or category
+    total = CATEGORY_SIZES.get(resolved_key, 0)
 
-    if score < 100:
+    if score != total:
         return jsonify({"status": "ignored"})
 
     db = get_db()
@@ -536,50 +649,38 @@ def save_leaderboard():
 def api_leaderboard(category):
     db = get_db()
 
+    total = CATEGORY_SIZES.get(category, 0)
+
     rows = execute(db, """
-        SELECT l.username, l.score, l.time
-        FROM leaderboard l
-        JOIN (
-            SELECT user_id,
-                   MAX(score) AS best_score
-            FROM leaderboard
-            WHERE category = %s
-            GROUP BY user_id
-        ) s
-        ON l.user_id = s.user_id AND l.score = s.best_score
-        JOIN (
-            SELECT user_id,
-                   MIN(time) AS best_time
-            FROM leaderboard
-            WHERE category = %s
-            AND score = (
-                SELECT MAX(score)
-                FROM leaderboard AS l2
-                WHERE l2.user_id = leaderboard.user_id
-                AND l2.category = %s
-            )
-            GROUP BY user_id
-        ) t
-        ON l.user_id = t.user_id AND l.time = t.best_time
-        WHERE l.category = %s
-        ORDER BY l.score DESC, l.time ASC
+        SELECT username, MIN(time) AS time
+        FROM leaderboard
+        WHERE category = %s
+        AND score = %s
+        GROUP BY username
+        ORDER BY time ASC
         LIMIT 10;
-    """, (category, category, category, category)).fetchall()
+    """, (category, total)).fetchall()
 
     return jsonify([dict(r) for r in rows])
 
-
-
 def load_category_sizes():
+    base_path = "static/data"
     sizes = {}
-    data_folder = os.path.join("static", "data")
 
-    for filename in os.listdir(data_folder):
-        if filename.endswith(".json"):
-            category = filename.replace(".json", "")
-            with open(os.path.join(data_folder, filename), "r", encoding="utf-8") as f:
-                words = json.load(f)
-                sizes[category] = len(words)
+    for level in os.listdir(base_path):
+        level_path = os.path.join(base_path, level)
+
+        if not os.path.isdir(level_path):
+            continue
+
+        for file in os.listdir(level_path):
+            if file.endswith(".json"):
+                category_name = f"{level}_{file[:-5]}"
+                full_path = os.path.join(level_path, file)
+
+                with open(full_path, "r", encoding="utf8") as f:
+                    data = json.load(f)
+                    sizes[category_name] = len(data)
 
     return sizes
 
@@ -703,6 +804,21 @@ def upload_avatar():
 
     flash("Profile picture updated!")
     return redirect(url_for("account"))
+
+@app.route("/api/failed_words_count")
+def api_failed_words_count():
+    if "user_id" not in session:
+        return jsonify({"count": 0})
+
+    db = get_db()
+    row = execute(db, """
+        SELECT COUNT(*) AS c
+        FROM failed_words
+        WHERE user_id = %s
+    """, (session["user_id"],)).fetchone()
+
+    count = row["c"] if row else 0
+    return jsonify({"count": count})
 
 if __name__ == "__main__":
     app.run(debug=True)

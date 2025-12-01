@@ -71,6 +71,16 @@
     body.custom {
         color: white;
     }
+
+    /* PAGE FADE-IN ANIMATION */
+    body {
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
     </style>
 
 
@@ -110,26 +120,39 @@
 
                     <a href="/rankings" class="hover:text-yellow-300">Rankings</a>
 
-                    <!-- SETTINGS DROPDOWN -->
-                    <div class="relative group">
-                        <button class="hover:text-yellow-300 transition">Settings</button>
+                    <!-- SETTINGS DROPDOWN (click toggle with Alpine.js) -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button 
+                            @click="open = !open"
+                            class="px-2 py-2 hover:text-yellow-300 transition"
+                        >
+                            Settings
+                        </button>
 
-                        <div class="absolute right-0 mt-1 w-40 bg-black/80 backdrop-blur-md rounded-lg shadow-lg 
-                                    opacity-0 translate-y-1 pointer-events-none 
-                                    group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
-                                    transition-all duration-150">
-
+                        <div 
+                            x-show="open"
+                            @click.away="open = false"
+                            x-transition
+                            class="absolute right-0 top-full mt-1 w-40 bg-black/80 backdrop-blur-md rounded-lg 
+                                shadow-lg overflow-hidden border border-white/10"
+                        >
                             <a href="{{ url_for('settings') }}"
-                            class="block px-4 py-2 hover:bg-yellow-400 hover:text-black rounded-t-lg transition">
+                                class="block px-4 py-2 hover:bg-yellow-400 hover:text-black transition">
                                 Preferences
                             </a>
 
                             <a href="{{ url_for('account') }}"
-                            class="block px-4 py-2 hover:bg-yellow-400 hover:text-black rounded-b-lg transition">
-                                Account Settings
+                                class="block px-4 py-2 hover:bg-yellow-400 hover:text-black transition">
+                                Account Data
+                            </a>
+
+                            <a href="{{ url_for('logout') }}"
+                                class="block px-4 py-2 hover:bg-yellow-400 hover:text-black rounded-b-lg transition">
+                                Log out
                             </a>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- MOBILE MENU BUTTON -->
@@ -175,7 +198,7 @@
         <!-- Footer -->
         <footer class="bg-slate-900/20 text-slate-200 text-xs">
             <div class="max-w-8xl mx-auto px-2 py-2 text-center">
-                <span>© 2025 Lutz127 • German Vocabulary App</span>
+                <span>© 2025 Lutz127 • German Vocabulary App v1.3</span>
             </div>
         </footer>
 
@@ -184,7 +207,9 @@
     window.userSettings = {
         speedrun: {{ 'true' if settings and settings.speedrun_enabled else 'false' }},
         sound: {{ 'true' if settings and settings.sound_enabled else 'false' }},
-        strict: {{ 'true' if settings and settings.strict_articles else 'false' }}
+        strict: {{ 'true' if settings and settings.strict_articles else 'false' }},
+        show_examples: {{ 'true' if settings and settings.show_examples else 'false' }},
+        plurals: {{ 'true' if settings and settings.plurals else 'false' }}
     };
     </script>
 

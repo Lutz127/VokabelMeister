@@ -1,0 +1,14 @@
+[
+    {"german": "wer?", "english": "who?", "example": "Wer ist das?"},
+    {"german": "was?", "english": "what?", "example": "Was machst du?"},
+    {"german": "wann?", "english": "when?", "example": "Wann kommst du?"},
+    {"german": "wo?", "english": "where?", "example": "Wo wohnst du?"},
+    {"german": "woher?", "english": "where from?", "example": "Woher kommst du?"},
+    {"german": "wohin?", "english": "where to?", "example": "Wohin gehst du?"},
+    {"german": "wie?", "english": "how?", "example": "Wie geht's dir?"},
+    {"german": "warum?", "english": "why?", "example": "Warum bist du müde?"},
+    {"german": "welcher?", "english": "which?", "example": "Welcher Bus fährt zum Zentrum?"},
+    {"german": "wie viel?", "english": "how much?", "example": "Wie viel kostet das?"},
+    {"german": "wie viele?", "english": "how many?", "example": "Wie viele Leute kommen?"},
+    {"german": "wessen?", "english": "whose?", "example": "Wessen Tasche ist das?"}
+]

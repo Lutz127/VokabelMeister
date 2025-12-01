@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block title %}
+German Vocabulary App
+{% endblock %}
+
+{% block content %}
+
+<!-- HOMEPAGE CONTENT -->
+<div class="home-content text-center max-w-5xl mx-auto px-2">
+
+    <h1 class="text-5xl font-bold mb-8 text-white">Objects & Things</h1>
+
+    <!-- Category Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+        <a data-level="A1" data-category="food_drinks"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
+            <h2 class="text-3xl font-semibold text-white text-center">Food & Drinks</h2>
+            <div class="progress-food_drinks absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <a data-level="A1" data-category="household_items"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
+            <h2 class="text-3xl font-semibold text-white text-center">Household Items</h2>
+            <div class="progress-household_items absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <a data-level="A1" data-category="everyday_objects"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
+            <h2 class="text-3xl font-semibold text-white text-center">Everyday Objects</h2>
+            <div class="progress-everyday_objects absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <a data-level="A1" data-category="toys"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
+            <h2 class="text-3xl font-semibold text-white text-center">Toys</h2>
+            <div class="progress-toys absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+
+        <a data-level="A1" data-category="supermarket"
+           class="category-card relative flex items-center justify-center 
+                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
+                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
+            <h2 class="text-3xl font-semibold text-white text-center">Supermarket</h2>
+            <div class="progress-supermarket absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
+                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- Quiz Content (hidden at first) -->
+<div id="quiz-container" class="hidden mt-[54px] flex justify-center">
+    <div id="quiz-wrapper" class="w-full max-w-9xl flex flex-col items-center max-w-3xl mx-auto w-full px-4">
+        
+        <div class="flex justify-center mb-4 gap-4">
+            <button id="mode-de-en" class="px-4 py-2 bg-yellow-300 rounded font-bold">
+                German → English
+            </button>
+            <button id="mode-en-de" class="px-4 py-2 bg-black/40 text-white rounded font-bold">
+                English → German
+            </button>
+        </div>
+
+        <!-- Timer -->
+        <div id="live-timer"
+             class="bg-black/50 p-3 rounded-xl shadow text-center text-yellow-300 text-xl mb-4 font-bold w-full">
+             Time: 0m 0.0s
+        </div>
+
+        <!-- Progress Bar -->
+        <div id="progress-container" class="w-full bg-black/30 rounded-full h-3 mb-4">
+            <div id="progress-bar" class="h-3 bg-yellow-400 rounded-full" style="width: 0%;"></div>
+        </div>
+
+        <!-- Quiz content -->
+        <div id="quiz-content" class="w-full"></div>
+
+        <!-- Back Button -->
+        <button id="quiz-back-button"
+            class="w-full mb-4 bg-black/40 text-white px-4 py-2 rounded-lg hover:bg-black/60 transition font-bold">
+            Go Back
+        </button>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+[
+    {"german": "der Hund", "plural": "die Hunde", "english": "dog", "example": "Der Hund spielt im Garten."},
+    {"german": "die Katze", "plural": "die Katzen", "english": "cat", "example": "Die Katze schläft auf dem Sofa."},
+    {"german": "der Vogel", "plural": "die Vögel", "english": "bird", "example": "Der Vogel singt am Morgen."},
+    {"german": "der Fisch", "plural": "die Fische", "english": "fish", "example": "Der Fisch schwimmt im Wasser."},
+    {"german": "das Pferd", "plural": "die Pferde", "english": "horse", "example": "Das Pferd läuft auf der Wiese."},
+    {"german": "die Kuh", "plural": "die Kühe", "english": "cow", "example": "Die Kuh gibt Milch."},
+    {"german": "das Schwein", "plural": "die Schweine", "english": "pig", "example": "Das Schwein liegt im Stall."},
+    {"german": "das Schaf", "plural": "die Schafe", "english": "sheep", "example": "Das Schaf hat viel Wolle."},
+    {"german": "die Maus", "plural": "die Mäuse", "english": "mouse", "example": "Die Maus ist sehr klein."},
+    {"german": "die Ente", "plural": "die Enten", "english": "duck", "example": "Die Ente schwimmt im Teich."},
+    {"german": "die Gans", "plural": "die Gänse", "english": "goose", "example": "Die Gans läuft über den Hof."},
+    {"german": "das Huhn / das Hühnchen", "plural": "die Hühner / die Hühnchen", "english": "chicken", "example": "Das Huhn legt ein Ei."},
+    {"german": "der Hahn", "plural": "die Hähne", "english": "rooster", "example": "Der Hahn kräht jeden Morgen."},
+    {"german": "der Bär", "plural": "die Bären", "english": "bear", "example": "Der Bär schläft im Winter."},
+    {"german": "der Löwe", "plural": "die Löwen", "english": "lion", "example": "Der Löwe ist sehr stark."},
+    {"german": "der Tiger", "plural": "die Tiger", "english": "tiger", "example": "Der Tiger lebt im Dschungel."},
+    {"german": "der Affe", "plural": "die Affen", "english": "monkey", "example": "Der Affe klettert auf den Baum."},
+    {"german": "der Hase / das Kaninchen", "plural": "die Hasen / die Kaninchen", "english": "rabbit", "example": "Der Hase springt sehr schnell."},
+    {"german": "der Frosch", "plural": "die Frösche", "english": "frog", "example": "Der Frosch sitzt am Wasser."},
+    {"german": "die Schlange", "plural": "die Schlangen", "english": "snake", "example": "Die Schlange bewegt sich leise."}
+]

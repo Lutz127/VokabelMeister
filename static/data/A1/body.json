@@ -1,0 +1,19 @@
+[
+    {"german": "der Kopf", "plural": "die Köpfe", "english": "head", "example": "Mein Kopf tut weh."},
+    {"german": "das Gesicht", "plural": "die Gesichter", "english": "face", "example": "Sie hat ein freundliches Gesicht."},
+    {"german": "das Auge", "plural": "die Augen", "english": "eye", "example": "Ich habe etwas im Auge."},
+    {"german": "das Ohr", "plural": "die Ohren", "english": "ear", "example": "Mein Ohr tut weh."},
+    {"german": "die Nase", "plural": "die Nasen", "english": "nose", "example": "Meine Nase ist kalt."},
+    {"german": "der Mund", "plural": "die Münder", "english": "mouth", "example": "Er öffnet den Mund."},
+    {"german": "der Zahn", "plural": "die Zähne", "english": "tooth", "example": "Mein Zahn tut weh."},
+    {"german": "der Hals", "plural": "die Hälse", "english": "neck / throat", "example": "Ich habe Schmerzen im Hals."},
+    {"german": "die Schulter", "plural": "die Schultern", "english": "shoulder", "example": "Meine Schulter tut weh."},
+    {"german": "der Arm", "plural": "die Arme", "english": "arm", "example": "Ich hebe den Arm."},
+    {"german": "die Hand", "plural": "die Hände", "english": "hand", "example": "Meine Hand ist kalt."},
+    {"german": "der Finger", "plural": "die Finger", "english": "finger", "example": "Ich schneide meinen Finger."},
+    {"german": "die Brust", "plural": "die Brüste", "english": "chest", "example": "Er hat Schmerzen in der Brust."},
+    {"german": "der Rücken", "plural": "die Rücken", "english": "back", "example": "Mein Rücken tut weh."},
+    {"german": "das Bein", "plural": "die Beine", "english": "leg", "example": "Ich kann mein Bein nicht bewegen."},
+    {"german": "der Fuß", "plural": "die Füße", "english": "foot", "example": "Meine Füße sind müde."},
+    {"german": "der Bauch", "plural": "die Bäuche", "english": "belly / stomach", "example": "Ich habe Bauchschmerzen."}
+]

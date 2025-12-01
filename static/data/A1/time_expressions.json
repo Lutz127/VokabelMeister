@@ -1,0 +1,17 @@
+[
+    {"german": "jetzt", "english": "now", "example": "Ich mache das jetzt."},
+    {"german": "heute", "english": "today", "example": "Heute ist ein guter Tag."},
+    {"german": "gestern", "english": "yesterday", "example": "Gestern war ich müde."},
+    {"german": "morgen", "english": "tomorrow", "example": "Morgen habe ich Zeit."},
+    {"german": "früher", "english": "earlier / in the past", "example": "Früher war alles anders."},
+    {"german": "später", "english": "later", "example": "Ich rufe dich später an."},
+    {"german": "bald", "english": "soon", "example": "Ich komme bald zurück."},
+    {"german": "sofort / gleich", "english": "immediately / right away", "example": "Ich komme sofort."},
+    {"german": "manchmal", "english": "sometimes", "example": "Manchmal gehe ich joggen."},
+    {"german": "oft / häufig", "english": "often / frequently", "example": "Ich lese oft Bücher."},
+    {"german": "immer", "english": "always", "example": "Ich trinke immer Kaffee morgens."},
+    {"german": "nie / niemals", "english": "never", "example": "Ich esse nie Fleisch."},
+    {"german": "jetzt gleich", "english": "right now", "example": "Ich mache es jetzt gleich."},
+    {"german": "vorher", "english": "before / beforehand", "example": "Vorher habe ich gefrühstückt."},
+    {"german": "nachher", "english": "afterwards / later", "example": "Ich rufe dich nachher an."}
+]

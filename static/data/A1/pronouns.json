@@ -1,0 +1,11 @@
+[
+    {"german": "ich", "english": "I", "example": "Ich lerne Deutsch."},
+    {"german": "du", "english": "you (singular informal)", "example": "Du bist mein Freund."},
+    {"german": "er", "english": "he", "example": "Er kommt aus Spanien."},
+    {"german": "sie", "english": "she", "example": "Sie arbeitet hier."},
+    {"german": "es", "english": "it", "example": "Es ist kalt."},
+    {"german": "wir", "english": "we", "example": "Wir gehen ins Kino."},
+    {"german": "ihr", "english": "you (plural informal)", "example": "Ihr seid müde."},
+    {"german": "sie", "english": "they", "example": "Sie wohnen in Berlin."},
+    {"german": "Sie", "english": "you (formal)", "example": "Wie heißen Sie?"}
+]
