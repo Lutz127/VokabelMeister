@@ -2,7 +2,7 @@
 
 ### This project is fully deployed at: https://german-vocab-app.onrender.com/
 
-### CS50 Video Demo: URL soon
+### CS50 Video Demo: https://youtu.be/Uv_pzzLecVc
 
 ## Description:
 

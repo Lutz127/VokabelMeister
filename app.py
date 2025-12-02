@@ -207,6 +207,10 @@ def a1_adjectives():
 def marathon():
     return render_template("a1_marathon.html")
 
+@app.route("/presentation")
+def cs50thing():
+    return render_template("presentation.html")
+
 @app.route("/api/progress")
 def api_progress():
     if "user_id" not in session:
