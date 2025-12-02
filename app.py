@@ -8,6 +8,13 @@ from datetime import datetime, timedelta, date
 from PIL import Image, ImageOps, ImageDraw
 
 app = Flask(__name__)
+
+@app.before_request
+def enforce_https():
+    if "onrender.com" in request.host:
+        if request.headers.get("X-Forwarded-Proto", "http") == "http":
+            return redirect(request.url.replace("http://", "https://"))
+
 app.secret_key = os.getenv("SECRET_KEY", "fallback-secret")
 
 # Profile Pictures
@@ -22,7 +29,7 @@ def allowed_file(filename):
 # Secure session cookies
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
-app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_SECURE"] = False
 app.config["SESSION_PERMANENT"] = True
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=30)
 
