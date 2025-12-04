@@ -1,5 +1,32 @@
 {% extends "layout.html" %}
-{% block title %}Global Rankings{% endblock %}
+{% block title %}
+Global Rankings | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Global German vocabulary rankings. Compare your XP, levels, and streak with learners around the world.">
+<link rel="canonical" href="https://vokabelmeister.com/rankings">
+<meta property="og:title" content="Global Rankings | VokabelMeister">
+<meta property="og:description" content="Compete with German learners worldwide. Earn XP, set records, climb the leaderboards.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/rankings">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "VokabelMeister Global Rankings",
+  "description": "Global German vocabulary rankings. Compare your XP, levels, and streak with learners around the world.",
+  "url": "https://vokabelmeister.com/rankings",
+  "itemListOrder": "Descending",
+  "numberOfItems": 100
+}
+</script>
+{% endblock %}
 
 {% block content %}
 

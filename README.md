@@ -2,8 +2,6 @@
 
 ### This project is fully deployed at: https://german-vocab-app.onrender.com/
 
-### CS50 Video Demo: https://youtu.be/Uv_pzzLecVc
-
 ## Description:
 
 **German Vocabulary App** is my CS50 Final Project: a full-stack, gamified learning platform built with Python (Flask), JavaScript, TailwindCSS, and PostgreSQL/SQLite. The goal of the project is to make learning German vocabulary feel interactive, rewarding, and competitive, more like playing a game rather than studying from a static list.
@@ -445,6 +443,40 @@ This required splitting answers, trimming whitespace, normalizing case, and chec
 
 ## Update Changelog
 
+### v1.5 (December 4th 2025)
+
+- Rebranded the project from “German Vocabulary App” to VokabelMeister
+
+- Added a landing page
+
+- Added Privacy Policy and Contact pages
+
+- Improved login and registration security, including rate-limiting protection
+
+- Implemented full SEO metadata across all pages (OpenGraph, canonical URLs, Twitter cards)
+
+- Added sitemap.xml and robots.txt for proper search engine indexing
+
+- Integrated full favicon & web manifest set for better browser and PWA support
+
+- Replaced CDN Tailwind with a locally compiled stylesheet for faster rendering
+
+- Added gzip compression to reduce asset sizes and improve load time
+
+- Improved Lighthouse Scores:
+
+  - **Performance**: Before: 84 (Mobile) / 99 (Desktop) | Now: 95 (Mobile) / 99 (Desktop)
+
+  - **Accessibility**: Before 88 | Now: 100
+
+  - **Best Practices:** Before: 100 | Now: 100
+
+  - **SEO**: Before: 73 | Now: 100
+
+- Added vokabelmeister.com domain using Cloudflare
+
+- Added cloudflare analytics
+
 ### v1.4.2 (December 3rd 2025)
 
 - Fixed "Time & Dates" quiz being bugged in userProgress
@@ -510,11 +542,6 @@ This required splitting answers, trimming whitespace, normalizing case, and chec
 - Improved quiz rendering and navigation logic
 
 - Fixed leaderboards
-
-## CS50 AI Assistance Notice
-
-Portions of this project were developed with the assistance of AI tools (ChatGPT) for guidance, debugging, and explanations.
-All final decisions, architecture, and code were written and implemented by me.
 
 ## Acknowledgements
 

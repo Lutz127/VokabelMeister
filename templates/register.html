@@ -1,16 +1,20 @@
 {% extends "layout.html" %}
+
+{% block title %}
+Register | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Create a free VokabelMeister account and start learning German vocabulary with XP, leaderboards and customizable preferences.">
+<link rel="canonical" href="https://vokabelmeister.com/register">
+<meta property="og:title" content="Register | VokabelMeister">
+<meta property="og:description" content="Join free and start your German learning journey with gamified tools and leaderboards.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/register">
+<meta name="twitter:card" content="summary">
+{% endblock %}
+
 {% block content %}
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div class="mb-4">
-      {% for msg in messages %}
-        <div class="bg-red-600 text-white p-3 rounded my-2 font-semibold text-center">
-          {{ msg }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
 
 <div class="max-w-md mx-auto bg-black/50 p-6 rounded-xl text-white text-center">
     <h2 class="text-3xl font-bold mb-4">Register</h2>

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Contact | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Contact the developer of VokabelMeister for support, feature requests, or feedback.">
+<link rel="canonical" href="https://vokabelmeister.com/contact">
+<meta property="og:title" content="Contact | VokabelMeister">
+<meta property="og:description" content="Need help or have suggestions? Get in touch.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+{% endblock %}
+
+{% block content %}
+
+<section class="max-w-3xl mx-auto mt-6 mb-10 text-white">
+
+    <h1 class="text-4xl font-extrabold mb-4 text-center">Contact Us</h1>
+    <p class="text-white/80 text-center mb-8">
+        Have feedback, found a bug, or want to suggest a new feature for VokabelMeister?
+        We’d love to hear from you.
+    </p>
+
+    <!-- Contact card -->
+    <div class="bg-black/70 backdrop-blur-md rounded-3xl shadow-2xl p-8 text-center">
+
+        <h2 class="text-3xl font-bold mb-4">Email</h2>
+        <p class="text-white/80 mb-6">
+            The best way to contact me is by email:
+            <a href="mailto:lutzdg2@gmail.com"
+               class="text-yellow-300 underline hover:text-yellow-200">
+                lutzdg2@gmail.com
+            </a>
+        </p>
+        <h2 class="text-3xl font-bold mb-4">Discord</h2>
+        <p class="text-white/80 mb-6">
+            Or if you'd like, you can also contact me via Discord:
+            <a href="https://discordapp.com/users/719595803596816404"
+               class="text-yellow-300 underline hover:text-yellow-200">
+                @Lutz127
+            </a>
+        </p>
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 
 {% block title %}
-German Vocabulary App
+A1 Objects & Things | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Practice German A1 vocabulary: Objects & Things category. Learn words for everyday objects and common items with quizzes, XP, and global leaderboards.">
+<link rel="canonical" href="https://vokabelmeister.com/a1/objects_things">
+<meta property="og:title" content="A1 Objects & Things | VokabelMeister">
+<meta property="og:description" content="Master foundational German vocabulary with speedrun quizzes and competitive leaderboards.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/a1/objects_things">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 {% endblock %}
 
 {% block content %}
@@ -14,7 +25,7 @@ German Vocabulary App
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <a data-level="A1" data-category="food_drinks"
+        <a href="/a1/food_drinks" onclick="event.preventDefault(); startCategory('food_drinks');" data-level="A1" data-category="food_drinks"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -24,7 +35,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="household_items"
+        <a href="/a1/household_items" onclick="event.preventDefault(); startCategory('household_items');" data-level="A1" data-category="household_items"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -34,7 +45,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="everyday_objects"
+        <a href="/a1/everyday_objects" onclick="event.preventDefault(); startCategory('everyday_objects');" data-level="A1" data-category="everyday_objects"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -44,7 +55,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="toys"
+        <a href="/a1/toys" onclick="event.preventDefault(); startCategory('toys');" data-level="A1" data-category="toys"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -54,7 +65,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="supermarket"
+        <a href="/a1/supermarket" onclick="event.preventDefault(); startCategory('supermarket');" data-level="A1" data-category="supermarket"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">

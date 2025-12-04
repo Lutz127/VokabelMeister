@@ -1,0 +1,175 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Privacy Policy | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Learn how VokabelMeister handles your data, privacy, and account information.">
+<link rel="canonical" href="https://vokabelmeister.com/privacy">
+<meta property="og:title" content="Privacy Policy | VokabelMeister">
+<meta property="og:description" content="Full details on data use, security, and account rights.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+{% endblock %}
+
+{% block content %}
+
+<section class="max-w-3xl mx-auto mt-6 mb-12 text-white">
+
+    <h1 class="text-4xl font-extrabold mb-6 text-center">Privacy Policy</h1>
+
+    <p class="text-sm text-white/60 mb-6 text-center">
+        Last updated: {{ "03-12-2025" }}<br>
+        This Privacy Policy explains how VokabelMeister collects, uses, and protects your data.
+    </p>
+
+    <div class="bg-black/70 backdrop-blur-md rounded-3xl shadow-2xl p-8 space-y-6 text-sm leading-relaxed">
+
+        <!-- 1. Data Controller -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">1. Data Controller</h2>
+            <p>
+                VokabelMeister is operated by <strong>Lutz127</strong>, based in Spain (“we”, “us”).
+                For any privacy-related questions, please contact:
+                <a href="mailto:lutzdg2@gmail.com" class="text-yellow-300 underline">lutzdg2@gmail.com</a>.
+            </p>
+        </section>
+
+        <!-- 2. Information We Collect -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">2. Information We Collect</h2>
+            <p class="mb-2">We collect only the data necessary to operate the app. This includes:</p>
+            <ul class="list-disc pl-5 space-y-1">
+                <li><strong>Account information:</strong> username, password hash (securely hashed with Werkzeug).</li>
+                <li><strong>Profile information:</strong> bio, country, avatar, creation date, last active date.</li>
+                <li><strong>Learning data:</strong> level, XP, next level XP, streaks, best scores, best times, category progress.</li>
+                <li><strong>Failed words:</strong> specific words you missed, number of failures, gender, plural, and English meaning.</li>
+                <li><strong>User settings:</strong> sound, theme, custom color, strict articles, plurals, example sentences, speedrun mode.</li>
+                <li><strong>Leaderboard data:</strong> displayed publicly (username, XP, level, best times, country).</li>
+                <li><strong>Technical data:</strong> IP address, device type, and server logs collected automatically by Render (our hosting provider).</li>
+                <li><strong>Local Storage:</strong> progress caching (userProgress) and UI preferences.</li>
+            </ul>
+        </section>
+
+        <!-- 3. How We Use the Information -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">3. How We Use Your Information</h2>
+            <p class="mb-2">Your data is used to:</p>
+            <ul class="list-disc pl-5 space-y-1">
+                <li>Provide and improve the functionality of quizzes, categories, leaderboards, XP, and streaks.</li>
+                <li>Save your progress, scores, and learning history.</li>
+                <li>Display rankings, speedrun results, and public profiles.</li>
+                <li>Store your personalized settings to customize your experience.</li>
+                <li>Detect bugs, prevent abuse, and maintain server stability.</li>
+            </ul>
+        </section>
+
+        <!-- 4. Legal Basis -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">4. Legal Basis (GDPR)</h2>
+            <p>If you reside in the EU/EEA, we process your data according to GDPR under:</p>
+            <ul class="list-disc pl-5 space-y-1 mt-2">
+                <li><strong>Contractual necessity:</strong> providing the VokabelMeister service to you.</li>
+                <li><strong>Legitimate interest:</strong> app security, rankings, improvements.</li>
+                <li><strong>Consent:</strong> when you provide optional profile data or settings.</li>
+            </ul>
+        </section>
+
+        <!-- 5. Cookies -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">5. Cookies & Local Storage</h2>
+            <p>
+                VokabelMeister uses a session cookie to keep you logged in.  
+                Local Storage is used to store progress caching and interface preferences.
+                We do not use analytics, advertising cookies, or tracking cookies.
+            </p>
+        </section>
+
+        <!-- 6. Data Sharing -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">6. Data Sharing</h2>
+            <p>We do <strong>not</strong> sell or share your data with third parties. Data may be shared only with:</p>
+            <ul class="list-disc pl-5 space-y-1 mt-2">
+                <li><strong>Render</strong>, our hosting provider, for necessary server operations.</li>
+                <li>Authorities, only if required by law.</li>
+            </ul>
+        </section>
+
+        <!-- 7. Leaderboards -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">7. Leaderboards & Public Profiles</h2>
+            <p>
+                If you participate in rankings, your username, XP, level, best times, and country may appear publicly.
+                Your avatar and bio are visible on your public profile.  
+                Do not use a username that contains personal information if you prefer privacy.
+            </p>
+        </section>
+
+        <!-- 8. Data Retention -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">8. Data Retention</h2>
+            <p>
+                Your data is stored indefinitely while your account remains active.
+                You may delete your account at any time through Account Settings.
+                Upon deletion, all personal data, scores, failed words, and settings are permanently removed.
+            </p>
+        </section>
+
+        <!-- 9. User Rights -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">9. Your Rights</h2>
+            <p class="mb-2">You may request:</p>
+            <ul class="list-disc pl-5 space-y-1">
+                <li>Access to your data</li>
+                <li>Correction of your data</li>
+                <li>Deletion of your account</li>
+                <li>Removal of your failed words or best scores</li>
+            </ul>
+            <p class="mt-2">
+                To exercise your rights, contact:
+                <a href="mailto:lutzdg2@gmail.com" class="text-yellow-300 underline">lutzdg2@gmail.com</a>.
+            </p>
+        </section>
+
+        <!-- 10. Security -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">10. Security</h2>
+            <p>
+                Passwords are hashed securely with Werkzug.  
+                Databases are restricted and protected by Render infrastructure.  
+                While we take strong measures, no system can guarantee absolute security.
+            </p>
+        </section>
+
+        <!-- 11. Children -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">11. Children</h2>
+            <p>
+                VokabelMeister is suitable for all ages, but we recommend children use usernames that do not reveal personal information.
+                Parents may request account deletion via email.
+            </p>
+        </section>
+
+        <!-- 12. Updates -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">12. Changes to This Policy</h2>
+            <p>
+                We may update this Privacy Policy as needed.
+                The “Last updated” date will reflect the latest changes.
+            </p>
+        </section>
+
+        <!-- 13. Contact -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">13. Contact</h2>
+            <p>
+                For any privacy-related concerns, contact:
+                <a href="mailto:lutzdg2@gmail.com" class="text-yellow-300 underline">lutzdg2@gmail.com</a>.
+            </p>
+        </section>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -4,44 +4,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const quizContainer = document.getElementById("quiz-container");
     const home = document.querySelector(".home-content");
 
+    setTimeout(() => {
+        fetch("/api/settings")
+            .then(res => res.json())
+            .then(s => {
+                if (s.default_mode) quizMode = s.default_mode;
+                updateModeButtons();
+            });
 
-    fetch("/api/settings")
-    .then(res => res.json())
-    .then(s => {
-        if (s.default_mode) quizMode = s.default_mode;
-        updateModeButtons();
-    });
+        fetch("/api/progress")
+            .then(res => res.json())
+            .then(data => {
+                userProgress = data;
+                if (Object.keys(data).length === 0) {
+                    localStorage.removeItem("userProgress");
+                }
+                localStorage.setItem("userProgress", JSON.stringify(userProgress));
+                updateCategoryProgressBars();
+            });
 
-    // Load user progress from backend
-    fetch("/api/progress")
-        .then(res => res.json())
-        .then(data => {
-            userProgress = data;
-            // Clear outdated local data if backend returns no progress
-            if (Object.keys(data).length === 0) {
-                localStorage.removeItem("userProgress");
-            }
-            localStorage.setItem("userProgress", JSON.stringify(userProgress));
-            updateCategoryProgressBars();
-        });
+        fetch("/api/failed_words_count")
+            .then(res => res.json())
+            .then(data => {
+                const card = document.getElementById("failed-words-card");
+                if (!card) return;
 
-    // Disable/enable Failed Words card based on count
-    fetch("/api/failed_words_count")
-        .then(res => res.json())
-        .then(data => {
-            const card = document.getElementById("failed-words-card");
-            if (!card) return;
-
-            if (data.count === 0) {
-                card.dataset.disabled = "true";
-                card.classList.add("opacity-40", "cursor-not-allowed");
-                card.classList.remove("hover:scale-[1.05]", "hover:shadow-xl");
-            } else {
-                card.dataset.disabled = "false";
-                card.classList.remove("opacity-40", "cursor-not-allowed");
-                card.classList.add("hover:scale-[1.05]", "hover:shadow-xl");
-            }
-        });
+                if (data.count === 0) {
+                    card.dataset.disabled = "true";
+                    card.classList.add("opacity-40", "cursor-not-allowed");
+                    card.classList.remove("hover:scale-[1.05]", "hover:shadow-xl");
+                } else {
+                    card.dataset.disabled = "false";
+                    card.classList.remove("opacity-40", "cursor-not-allowed");
+                    card.classList.add("hover:scale-[1.05]", "hover:shadow-xl");
+                }
+            });
+    }, 50);
 
     // CATEGORY CLICK HANDLER
     cards.forEach(card => {

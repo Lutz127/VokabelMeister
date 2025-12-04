@@ -3,16 +3,41 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}German Vocabulary App{% endblock %}</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
-    <style>
-    .progress-fill {
-        transition: width 0.5s ease;
-    }
-    </style>
+    <title>{% block title %}VokabelMeister | German Vocabulary App{% endblock %}</title>
+    {% block meta %}{% endblock %}
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon-16x16.png') }}">
 
-    <!-- Scale whole UI on larger screens -->
+    <!-- Android / Chrome icons -->
+    <link rel="icon" sizes="192x192" href="{{ url_for('static', filename='img/android-chrome-192x192.png') }}">
+    <link rel="icon" sizes="512x512" href="{{ url_for('static', filename='img/android-chrome-512x512.png') }}">
+
+    <!-- Favicon fallback -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    
+    <!-- Montserrat FONT -->
+    <link rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+      as="style"
+      onload="this.rel='stylesheet'">
+
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap">
+    </noscript>
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     <style>
+        .progress-fill {
+            transition: width 0.5s ease;
+        }
         /* default for phones / small screens */
         html {
             font-size: 12px;
@@ -24,86 +49,66 @@
                 font-size: 24px; /* 16 * 1.5 = 24 */
             }
         }
-    </style>
-
-    <style>
-    /* Hide scrollbar for Chrome, Edge, Safari */
-    ::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
-
-    /* Hide scrollbar for Firefox */
-    html {
-        scrollbar-width: none;
-    }
-
-    /* Hide scrollbar for IE, old Edge */
-    html {
-        -ms-overflow-style: none;
-    }
-    </style>
-
-    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        twemoji.parse(document.body, { folder: "svg", ext: ".svg" });
-    });
-    </script>
-
-    <style>
-    img.emoji {
-        width: 1em;
-        height: 1em;
-        display: inline-block;
-        vertical-align: -0.1em;
-    }
-
-    img.profile-flag {
-        height: 1.3em;
-        width: 1.3em;
-        vertical-align: -0.15em;
-    }
-    </style>
     
-    <!-- Montserrat FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+        /* Hide scrollbar for Chrome, Edge, Safari */
+        ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+        /* Hide scrollbar for Firefox */
+        html {
+            scrollbar-width: none;
+        }
 
-    <!-- Alpine.js -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+        /* Hide scrollbar for IE, old Edge */
+        html {
+            -ms-overflow-style: none;
+        } 
+        img.emoji {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            vertical-align: -0.1em;
+        }
 
-    <style>
-    /* DARK THEME */
-    body.dark {
-        background: #0f0f0f;
-        color: white;
-    }
+        img.profile-flag {
+            height: 1.3em;
+            width: 1.3em;
+            vertical-align: -0.15em;
+        }
 
-    /* GERMAN FLAG THEME */
-    body.german {
-        background: linear-gradient(to bottom, black, red, yellow);
-        color: white;
-    }
+        /* DARK THEME */
+        body.dark {
+            background: #0f0f0f;
+            color: white;
+        }
 
-    /* CUSTOM THEME */
-    body.custom {
-        color: white;
-    }
+        /* GERMAN FLAG THEME */
+        body.german {
+            background: linear-gradient(to bottom, black, red, yellow) fixed;
+            background-size: 100% 100vh;
+            color: white;
+        }
 
-    /* PAGE FADE-IN ANIMATION */
-    body {
-        animation: fadeIn 0.3s ease-out;
-    }
+        /* CUSTOM THEME */
+        body.custom {
+            color: white;
+        }
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+        /* PAGE FADE-IN ANIMATION */
+        body {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a0a03717f6304055be8d4f48d3c426fd"}'></script>
 
     {% block extra_head %}{% endblock %}
 </head>
@@ -119,7 +124,7 @@
         <div id="flash-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 space-y-3">
         {% for msg in messages %}
             <div class="flash-msg bg-yellow-400 text-black font-bold px-6 py-3 rounded-xl shadow-lg
-                        opacity-0 transform scale-90 transition-all duration-500">
+                        opacity-0 transform scale-90 transition-all duration-500 text-center">
             {{ msg }}
             </div>
         {% endfor %}
@@ -158,9 +163,9 @@
             <nav class="max-w-8xl mx-auto px-4 py-3 flex items-center justify-between">
 
                 <!-- LOGO -->
-                <a href="{{ url_for('index') }}" class="flex items-center gap-2 font-semibold text-lg">
-                    <img src="{{ url_for('static', filename='img/logo.png') }}" class="h-8 w-8 object-contain">
-                    <span>German Vocabulary App</span>
+                <a href="{{ url_for('index') }}" class="flex items-center gap-3 font-semibold text-xl">
+                    <img src="{{ url_for('static', filename='img/navbar_icon.png') }}" alt="VokabelMeister Logo" class="h-9 w-9 object-contain">
+                    <span>VokabelMeister</span>
                 </a>
 
                 <!-- DESKTOP MENU -->
@@ -258,7 +263,9 @@
         <!-- Footer -->
         <footer class="bg-slate-900/20 text-slate-200 text-xs">
             <div class="max-w-8xl mx-auto px-2 py-2 text-center">
-                <span>© 2025 Lutz127 • German Vocabulary App v1.4.2</span>
+                <span>© 2025 Lutz127 • VokabelMeister v1.5 |</span>
+                <a href="{{ url_for('privacy') }}" class="hover:text-yellow-300">Privacy</a>
+                <a href="{{ url_for('contact') }}" class="hover:text-yellow-300">Contact</a>
             </div>
         </footer>
 
@@ -280,5 +287,11 @@
     <audio id="correct-sound" src="{{ url_for('static', filename='sfx/correct.mp3') }}"></audio>
     <audio id="wrong-sound" src="{{ url_for('static', filename='sfx/wrong.mp3') }}"></audio>
     <audio id="type-sound" src="{{ url_for('static', filename='sfx/type.mp3') }}"></audio>
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" defer></script>
+    <script defer>
+    document.addEventListener("DOMContentLoaded", function() {
+        twemoji.parse(document.body, { folder: "svg", ext: ".svg" });
+    });
+    </script>
 </body>
 </html>

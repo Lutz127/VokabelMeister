@@ -1,4 +1,4 @@
-import sqlite3, re, os, json, uuid
+import sqlite3, re, os, json, uuid, time
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from flask import Flask, render_template, session, g, request, redirect, url_for, flash, jsonify, send_from_directory
@@ -6,8 +6,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta, date
 from PIL import Image, ImageOps, ImageDraw
+from flask_compress import Compress
 
 app = Flask(__name__)
+Compress(app)
+
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=[]
+)
 
 @app.before_request
 def enforce_https():
@@ -49,6 +60,16 @@ def execute(db, query, params=()):
 def valid_username(username):
     """Allow A-Z, a-z, 0-9, underscore, length 3–20."""
     return re.fullmatch(r"[A-Za-z0-9_]{3,20}", username) is not None
+
+def record_failed_attempt(username):
+    key = f"fails_{username}"
+    session[key] = session.get(key, 0) + 1
+    return session[key]
+
+def reset_failed_attempts(username):
+    key = f"fails_{username}"
+    if key in session:
+        del session[key]
 
 def get_db():
     if "db" not in g:
@@ -150,9 +171,26 @@ def iso_to_emoji(code):
 
 app.jinja_env.filters["country_flag"] = iso_to_emoji
 
+@app.route("/robots.txt")
+def robots_txt():
+    return send_from_directory("static", "robots.txt", mimetype="text/plain")
+
+
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    return send_from_directory("static", "sitemap.xml", mimetype="application/xml")
+
 @app.route("/")
-def root():
-    return redirect("/a1")
+def landing():
+    return render_template("landing.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
 
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
@@ -254,39 +292,54 @@ def api_progress():
 
 
 @app.route("/register", methods=["GET", "POST"])
+@limiter.limit("5 per minute")  # stop registration spam
 def register():
     if "user_id" in session:
         return redirect("/")
 
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-        confirm = request.form["confirm_password"]
+        username = request.form["username"].strip()
+        password = request.form["password"].strip()
+        confirm = request.form["confirm_password"].strip()
 
+        # Username validation
         if not valid_username(username):
+            flash("Invalid username – use 3–20 letters, numbers, or underscores.")
             return redirect("/register")
 
+        # Password match
         if password != confirm:
             flash("Passwords do not match")
             return redirect("/register")
 
+        # Password strength
+        if len(password) < 6:
+            flash("Password must be at least 6 characters.")
+            return redirect("/register")
+
         db = get_db()
 
+        # Duplicate username check
         existing = execute(db,
-            "SELECT * FROM users WHERE username = %s", (username,)
+            "SELECT * FROM users WHERE username = %s",
+            (username,)
         ).fetchone()
 
         if existing:
             flash("Username already taken")
             return redirect("/register")
 
+        # Hash password
         hash_pw = generate_password_hash(password)
 
+        # Insert user
         execute(db,
             "INSERT INTO users (username, hash) VALUES (%s, %s)",
             (username, hash_pw)
         )
         db.commit()
+
+        time.sleep(1)  # anti-bot delay
 
         flash("Registration successful! Please log in.")
         return redirect("/login")
@@ -294,6 +347,8 @@ def register():
     return render_template("register.html")
 
 @app.route("/login", methods=["GET", "POST"])
+@limiter.limit("10 per minute")          # Hard limit per IP
+@limiter.limit("5 per minute", key_func=lambda: request.form.get("username", ""))  # Per-username
 def login():
     if "user_id" in session:
         return redirect("/")
@@ -304,18 +359,45 @@ def login():
 
         db = get_db()
 
-        user = execute(db,"SELECT * FROM users WHERE username = %s", (username,)).fetchone()
-        if not user or not check_password_hash(user["hash"], password):
-            flash("Invalid username or password")
+        # Temporary lockout for repeated failures
+        fails = session.get(f"fails_{username}", 0)
+        if fails >= 5:
+            flash("Too many failed attempts. Try again in 1 minute.")
+            time.sleep(2)  # slow down bots
             return redirect("/login")
 
-        session.permanent = True
+        # Fetch user
+        user = execute(db,
+            "SELECT * FROM users WHERE username = %s",
+            (username,)
+        ).fetchone()
 
+        # Validate user + password
+        if not user or not check_password_hash(user["hash"], password):
+
+            # delay to slow brute force
+            time.sleep(1)
+
+            attempts = record_failed_attempt(username)
+            remaining = max(0, 5 - attempts)
+
+            if remaining == 0:
+                flash("Too many failed attempts. Locked for 1 minute.")
+            else:
+                flash(f"Invalid credentials ({remaining} attempts left).")
+
+            return redirect("/login")
+
+        # Successful login → reset failure counter
+        reset_failed_attempts(username)
+
+        # Log user in
+        session.permanent = True
         session["user_id"] = user["id"]
         session["username"] = user["username"]
 
         return redirect("/")
-    
+
     return render_template("login.html")
 
 @app.route("/logout")

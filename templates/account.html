@@ -1,6 +1,16 @@
 {% extends "layout.html" %}
 
-{% block title %}Your Account{% endblock %}
+{% block title %}
+Your Account | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Manage your VokabelMeister account, best scores and failed words.">
+<link rel="canonical" href="https://vokabelmeister.com/account">
+<meta property="og:title" content="Your Account | VokabelMeister">
+<meta property="og:description" content="Update your profile, best scores, and failed words.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+{% endblock %}
 
 {% block content %}
 

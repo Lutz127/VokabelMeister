@@ -1,6 +1,13 @@
 {% extends "layout.html" %}
 
-{% block title %}Page Not Found — German Vocabulary App{% endblock %}
+{% block title %}Page Not Found | VokabelMeister{% endblock %}
+
+{% block meta %}
+<meta name="robots" content="noindex">
+<meta name="description" content="Page not found. Return to VokabelMeister and continue learning German vocabulary.">
+<meta property="og:title" content="Page Not Found | VokabelMeister">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+{% endblock %}
 
 {% block content %}
 <div class="min-h-[60vh] flex flex-col items-center justify-center text-center text-white">

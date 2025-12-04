@@ -1,8 +1,23 @@
 {% extends "layout.html" %}
+
+{% block title %}
+Login | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Log in to VokabelMeister to continue learning German vocabulary and competing globally.">
+<link rel="canonical" href="https://vokabelmeister.com/login">
+<meta property="og:title" content="Login | VokabelMeister">
+<meta property="og:description" content="Log in to VokabelMeister to continue learning German vocabulary and competing globally.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/login">
+<meta name="twitter:card" content="summary">
+{% endblock %}
+
 {% block content %}
 
 <div class="max-w-md mx-auto bg-black/50 p-6 rounded-xl text-white text-center">
-    <h2 class="text-3xl font-bold mb-4">Login</h2>
+    <h2 class="text-3xl font-bold mb-4">Log In</h2>
 
     <form method="POST">
         <input name="username"

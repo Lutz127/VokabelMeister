@@ -1,15 +1,27 @@
 {% extends "layout.html" %}
 
 {% block title %}
-German Vocabulary App
+A1 Categories | VokabelMeister
 {% endblock %}
+
+{% block meta %}
+<meta name="description" content="Choose from 50+ German A1 vocabulary categories. Track progress, earn XP, and climb global rankings while improving your German skills.">
+<link rel="canonical" href="https://vokabelmeister.com/a1">
+<meta property="og:title" content="A1 Vocabulary Categories | VokabelMeister">
+<meta property="og:description" content="Practice all A1 German vocabulary with quizzes, XP, streaks, and leaderboards.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/a1">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
 
 {% block content %}
 
 <!-- HOMEPAGE CONTENT -->
 <div class="home-content text-center max-w-5xl mx-auto px-2">
 
-    <h1 class="text-5xl font-bold mb-8 text-white">Choose a category</h1>
+    <h1 class="text-5xl font-bold mb-8 text-white">A1 categories</h1>
 
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -123,7 +135,7 @@ German Vocabulary App
         </a>
 
         <!-- Test -->
-        <a data-level="A1" data-category="test"
+        <a href="/a1/test" onclick="event.preventDefault(); startCategory('test');" data-level="A1" data-category="test"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">

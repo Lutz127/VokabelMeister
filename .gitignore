@@ -13,3 +13,9 @@ static/uploads/
 sqlite3.exe
 *.exe
 index_copy.html
+node_modules/
+package-lock.json
+instance/
+npm-debug.log
+yarn-debug.log
+yarn-error.log

@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 
 {% block title %}
-German Vocabulary App
+A1 Grammar Basics | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Practice German A1 vocabulary: Grammar Basics category. Learn key grammar terms like question words, pronouns, prepositions and particles with quizzes, XP, and global leaderboards.">
+<link rel="canonical" href="https://vokabelmeister.com/a1/grammar_basics">
+<meta property="og:title" content="A1 Grammar Basics | VokabelMeister">
+<meta property="og:description" content="Master foundational German vocabulary with speedrun quizzes and competitive leaderboards.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/a1/grammar_basics">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 {% endblock %}
 
 {% block content %}
@@ -14,7 +25,7 @@ German Vocabulary App
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <a data-level="A1" data-category="w_questions"
+        <a href="/a1/w_questions" onclick="event.preventDefault(); startCategory('w_questions');" data-level="A1" data-category="w_questions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -25,7 +36,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="prepositions"
+        <a href="/a1/prepositions" onclick="event.preventDefault(); startCategory('prepositions');" data-level="A1" data-category="prepositions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -36,7 +47,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="pronouns"
+        <a href="/a1/pronouns" onclick="event.preventDefault(); startCategory('pronouns');" data-level="A1" data-category="pronouns"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -47,7 +58,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="conversation_particles"
+        <a href="/a1/conversation_particles" onclick="event.preventDefault(); startCategory('conversation_particles');" data-level="A1" data-category="conversation_particles"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -58,7 +69,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="negation"
+        <a href="/a1/negation" onclick="event.preventDefault(); startCategory('negation');" data-level="A1" data-category="negation"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -69,7 +80,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="time_expressions"
+        <a href="/a1/time_expressions" onclick="event.preventDefault(); startCategory('time_expressions');" data-level="A1" data-category="time_expressions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -80,7 +91,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="possesive_pronouns"
+        <a href="/a1/possesive_pronouns" onclick="event.preventDefault(); startCategory('possesive_pronouns');" data-level="A1" data-category="possesive_pronouns"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -91,7 +102,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="demonstratives"
+        <a href="/a1/demonstratives" onclick="event.preventDefault(); startCategory('demonstratives');" data-level="A1" data-category="demonstratives"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -101,7 +112,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="quantifiers"
+        <a href="/a1/quantifiers" onclick="event.preventDefault(); startCategory('quantifiers');" data-level="A1" data-category="quantifiers"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">

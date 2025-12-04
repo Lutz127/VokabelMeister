@@ -1,0 +1,28 @@
+User-agent: *
+
+Disallow: /login
+Disallow: /register
+Disallow: /logout
+Disallow: /account
+Disallow: /settings
+Disallow: /delete_account
+Disallow: /change_username
+Disallow: /change_bio
+Disallow: /update_country
+Disallow: /upload_avatar
+Disallow: /save_score
+Disallow: /save_failure
+Disallow: /save_leaderboard
+Disallow: /clear_failed_words
+Disallow: /clear_best_scores
+Disallow: /api/
+Disallow: /uploads/
+Disallow: /static/data/
+Disallow: /404
+Disallow: /u/
+
+Allow: /
+
+# Sitemap
+Sitemap: https://vokabelmeister.com/sitemap.xml
+

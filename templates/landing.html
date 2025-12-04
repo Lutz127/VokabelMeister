@@ -1,0 +1,232 @@
+{% extends "layout.html" %}
+
+{% block title %}
+VokabelMeister | German Vocabulary Speedrun
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Learn German vocabulary fast and competitively. Master A1 vocabulary with over 50 categories and 750+ words. Earn XP, climb global leaderboards, and customize your practice with strict articles, plurals, example sentences, and more.">
+<meta name="keywords" content="learn german vocabulary, german vocabulary app, german vocab trainer, german A1 words, german speedrun learning, vokabelmeister, german learning tool">
+<link rel="canonical" href="https://vokabelmeister.com/">
+<meta property="og:title" content="VokabelMeister | German Vocabulary App">
+<meta property="og:description" content="Master German vocabulary with speedrun quizzes, XP, leaderboards, and smart difficulty tools.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+
+{% block extra_head %}
+<style>
+/* Fade / slide animation */
+.section-fade {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: sectionIn 0.9s ease-out forwards;
+}
+.section-delay-1 { animation-delay: 0.15s; }
+.section-delay-2 { animation-delay: 0.3s; }
+.section-delay-3 { animation-delay: 0.45s; }
+
+@keyframes sectionIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Slight tilt on hover for cards */
+.tilt-card {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.tilt-card:hover {
+    transform: translateY(-4px) rotate(-0.4deg) scale(1.01);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VokabelMeister",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "url": "https://vokabelmeister.com",
+  "image": "https://vokabelmeister.com/static/img/logo.png",
+  "description": "Learn German vocabulary fast and competitively. Master A1 vocabulary with over 50 categories and 750+ words. Earn XP, climb global leaderboards, and customize your practice with strict articles, plurals, example sentences, and more.",
+  "creator": {
+    "@type": "Person",
+    "name": "Lutz127",
+    "address": {
+      "@type": "Country",
+      "name": "Spain"
+    }
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="relative">
+
+    <!-- LARGE LOGO AT TOP -->
+    <div class="section-fade section-delay-1 flex justify-center mt-10 mb-6">
+        <img src="{{ url_for('static', filename='img/logo.png') }}"
+             class="h-32 w-32 md:h-40 md:w-40 drop-shadow-2xl"
+             alt="VokabelMeister Logo">
+    </div>
+
+    <section class="section-fade section-delay-1 mb-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+            Learn German Vocabulary <br> and Compete as You Learn.
+        </h1>
+        <p class="text-white/85 text-lg max-w-3xl mx-auto">
+            Master all A1 vocabulary with over <span class="font-semibold">50 categories</span> 
+            and <span class="font-semibold">750+ words</span>. 
+            Earn XP, build streaks, climb global leaderboards, and customize your practice 
+            with strict articles, plurals, example sentences, and more.
+        </p>
+
+        <div class="mt-7">
+            <a href="/a1"
+               class="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 
+                      text-black font-extrabold text-lg px-7 py-3 rounded-2xl
+                      shadow-xl hover:shadow-2xl hover:scale-[1.03]
+                      transition transform duration-200 select-none">
+                Start Practicing
+            </a>
+        </div>
+    </section>
+
+    <section class="section-fade section-delay-2 mb-16">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-white/90">
+            <div class="bg-black/55 rounded-2xl py-4 px-4 shadow-xl backdrop-blur-md">
+                <div class="text-2xl font-extrabold">50+</div>
+                <div class="text-sm uppercase tracking-wide text-white/70">A1 Categories</div>
+            </div>
+            <div class="bg-black/55 rounded-2xl py-4 px-4 shadow-xl backdrop-blur-md">
+                <div class="text-2xl font-extrabold">750+</div>
+                <div class="text-sm uppercase tracking-wide text-white/70">German Words</div>
+            </div>
+            <div class="bg-black/55 rounded-2xl py-4 px-4 shadow-xl backdrop-blur-md">
+                <div class="text-2xl font-extrabold">A1–A2</div>
+                <div class="text-sm uppercase tracking-wide text-white/70">Ideal Level</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core loop: Play – Compete – Improve -->
+    <section class="section-fade section-delay-3 mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-10">
+            Everything You Need to Master German Vocabulary
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div class="bg-black/60 rounded-3xl p-7 shadow-xl backdrop-blur-md tilt-card">
+                <div class="text-4xl mb-3">🎮</div>
+                <h3 class="text-2xl font-bold text-white mb-2">Play fast-paced quizzes</h3>
+                <p class="text-white/80 text-sm">
+                    Answer German ↔ English questions across focused categories:
+                    family, verbs, adjectives, environment, hobbies, and many more.
+                </p>
+            </div>
+
+            <div class="bg-black/60 rounded-3xl p-7 shadow-xl backdrop-blur-md tilt-card">
+                <div class="text-4xl mb-3">🏆</div>
+                <h3 class="text-2xl font-bold text-white mb-2">Compete on leaderboards</h3>
+                <p class="text-white/80 text-sm">
+                    Every quiz can become a speedrun. Compare your best times with other
+                    learners and climb both category leaderboards and the global rankings page.
+                </p>
+            </div>
+
+            <div class="bg-black/60 rounded-3xl p-7 shadow-xl backdrop-blur-md tilt-card">
+                <div class="text-4xl mb-3">📈</div>
+                <h3 class="text-2xl font-bold text-white mb-2">Improve with targeted practice</h3>
+                <p class="text-white/80 text-sm">
+                    VokabelMeister automatically tracks your weakest words and lets you re-train them
+                    in the <span class="font-semibold">Failed Words</span> mode.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Gamified systems: XP, marathon, rankings -->
+    <section class="section-fade section-delay-1 mb-16">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- XP + Leveling -->
+            <div class="bg-black/65 rounded-3xl p-7 shadow-xl backdrop-blur-md tilt-card">
+                <div class="text-4xl mb-3">⭐</div>
+                <h3 class="text-2xl font-bold text-white mb-2">XP & Leveling</h3>
+                <p class="text-white/80 text-sm">
+                    Earn XP after every quiz based on accuracy and speed.  
+                    Level up, fill your XP bar, and see how you stack up on the global rankings.
+                </p>
+            </div>
+
+            <!-- A1 Marathon -->
+            <div class="bg-black/65 rounded-3xl p-7 shadow-xl backdrop-blur-md tilt-card">
+                <div class="text-4xl mb-3">🧩</div>
+                <h3 class="text-2xl font-bold text-white mb-2">A1 Marathon</h3>
+                <p class="text-white/80 text-sm">
+                    Ready for a challenge? The A1 Marathon mixes 
+                    <span class="font-semibold">200+ words</span> into one long run.
+            </div>
+
+            <!-- Category progress -->
+            <div class="bg-black/65 rounded-3xl p-7 shadow-xl backdrop-blur-md tilt-card">
+                <div class="text-4xl mb-3">📊</div>
+                <h3 class="text-2xl font-bold text-white mb-2">Category Progress Bars</h3>
+                <p class="text-white/80 text-sm">
+                    Each main category (Basics, Grammar, People & Daily Life, Verbs, etc.)
+                    has its own animated progress bar so you can track your progress.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Preferences / control section -->
+    <section class="section-fade section-delay-2 mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-8">
+            You decide how strict your training is.
+        </h2>
+
+        <div class="bg-black/70 rounded-3xl p-8 shadow-2xl max-w-4xl mx-auto tilt-card">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-white/85 text-sm">
+
+                <div>
+                    <h3 class="font-bold text-lg mb-1">Articles</h3>
+                    <p>
+                        Toggle “strict articles” to require
+                        <span class="italic">der / die / das</span> in your answers.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-lg mb-1">Plurals</h3>
+                    <p>
+                        Enable plural training to practice both singular and plural forms
+                        of nouns.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-lg mb-1">Examples Sentences</h3>
+                    <p>
+                        Choose whether to see example sentences and play typing / correct / wrong
+                        sound effects for a more game-like experience.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

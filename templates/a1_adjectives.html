@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 
 {% block title %}
-German Vocabulary App
+A1 Adjectives | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Practice German A1 vocabulary: Adjectives category. Learn essential words for describing people, objects and situations with quizzes, XP, and global leaderboards.">
+<link rel="canonical" href="https://vokabelmeister.com/a1/adjectives">
+<meta property="og:title" content="A1 Adjectives | VokabelMeister">
+<meta property="og:description" content="Master foundational German vocabulary with speedrun quizzes and competitive leaderboards.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/a1/adjectives">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 {% endblock %}
 
 {% block content %}
@@ -14,7 +25,7 @@ German Vocabulary App
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <a data-level="A1" data-category="common_adjectives"
+        <a href="/a1/common_adjectives" onclick="event.preventDefault(); startCategory('common_adjectives');" data-level="A1" data-category="common_adjectives"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -24,7 +35,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="feelings"
+        <a href="/a1/feelings" onclick="event.preventDefault(); startCategory('feelings');" data-level="A1" data-category="feelings"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -34,7 +45,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="sizes_measurements"
+        <a href="/a1/sizes_measurements" onclick="event.preventDefault(); startCategory('sizes_measurements');" data-level="A1" data-category="sizes_measurements"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">

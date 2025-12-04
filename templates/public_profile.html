@@ -1,6 +1,19 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ profile.username }} — Profile{% endblock %}
+{% block title %}
+{{ profile.username }} | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="View public German vocabulary learning profiles: XP, streaks, completed quizzes and global rankings">
+<link rel="canonical" href="https://vokabelmeister.com/u/{{ profile.username }}">
+<meta property="og:title" content="{{ profile.username }} | VokabelMeister">
+<meta property="og:description" content="See {{ profile.username }}'s German learning progress, XP, completed quizzes and rankings.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/u/{{ profile.username }}">
+<meta property="og:type" content="profile">
+<meta name="twitter:card" content="summary">
+{% endblock %}
 
 {% block content %}
 

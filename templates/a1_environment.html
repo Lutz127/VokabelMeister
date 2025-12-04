@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 
 {% block title %}
-German Vocabulary App
+A1 Environment | VokabelMeister
+{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Practice German A1 vocabulary: Environment category. Learn words for weather, animals, nature, and geography with quizzes, XP, and global leaderboards.">
+<link rel="canonical" href="https://vokabelmeister.com/a1/environment">
+<meta property="og:title" content="A1 Environment | VokabelMeister">
+<meta property="og:description" content="Master foundational German vocabulary with speedrun quizzes and competitive leaderboards.">
+<meta property="og:image" content="https://vokabelmeister.com/static/img/logo.png">
+<meta property="og:url" content="https://vokabelmeister.com/a1/environment">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 {% endblock %}
 
 {% block content %}
@@ -14,7 +25,7 @@ German Vocabulary App
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <a data-level="A1" data-category="weather"
+        <a href="/a1/weather" onclick="event.preventDefault(); startCategory('weather');" data-level="A1" data-category="weather"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -25,7 +36,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="animals"
+        <a href="/a1/animals" onclick="event.preventDefault(); startCategory('animals');" data-level="A1" data-category="animals"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -35,7 +46,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="nature"
+        <a href="/a1/common_adjectives" onclick="event.preventDefault(); startCategory('common_adjectives');" data-level="A1" data-category="common_adjectives"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -45,7 +56,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="geography_basics"
+        <a href="/a1/geography_basics" onclick="event.preventDefault(); startCategory('geography_basics');" data-level="A1" data-category="geography_basics"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -55,7 +66,7 @@ German Vocabulary App
             </div>
         </a>
 
-        <a data-level="A1" data-category="city_places"
+        <a href="/a1/city_places" onclick="event.preventDefault(); startCategory('city_places');" data-level="A1" data-category="city_places"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
