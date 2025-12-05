@@ -8,6 +8,6 @@ blinker>=1.6
 psycopg2-binary
 Pillow
 flask-limiter
-limits
+limits>=3.8.0
 Flask-Compress
 Flask-WTF
