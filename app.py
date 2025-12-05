@@ -15,26 +15,21 @@ csrf = CSRFProtect(app)
 
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from limits.storage import RedisRESTStorage
+from limits.storage import RedisStorage
 
-redis_url = os.getenv("UPSTASH_REDIS_REST_URL")
-redis_token = os.getenv("UPSTASH_REDIS_REST_TOKEN")
+redis_url = os.getenv("REDIS_URL")
 
-if redis_url and redis_token:
-    storage = RedisRESTStorage(
-        redis_url,
-        headers={"Authorization": f"Bearer {redis_token}"}
-    )
+if redis_url:
+    storage_uri = redis_url
 else:
-    storage = None
+    storage_uri = "memory://"
 
 limiter = Limiter(
     key_func=get_remote_address,
-    storage=storage,
+    storage_uri=storage_uri,
     app=app,
     default_limits=[]
 )
-
 
 @app.before_request
 def enforce_https():
