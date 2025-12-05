@@ -11,3 +11,4 @@ flask-limiter
 limits>=3.8.0
 Flask-Compress
 Flask-WTF
+redis>=5.0.0
