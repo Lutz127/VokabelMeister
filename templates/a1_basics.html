@@ -25,7 +25,7 @@ A1 Basics | VokabelMeister
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <a href="/a1/colors" onclick="event.preventDefault(); startCategory('colors');" data-level="A1" data-category="colors"
+        <a href="/a1/colors" onclick="event.preventDefault();" data-level="A1" data-category="colors"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -36,7 +36,7 @@ A1 Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/numbers" onclick="event.preventDefault(); startCategory('numbers');" data-level="A1" data-category="numbers"
+        <a href="/a1/numbers" onclick="event.preventDefault();" data-level="A1" data-category="numbers"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -47,7 +47,7 @@ A1 Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/time_dates" onclick="event.preventDefault(); startCategory('time_dates');" data-level="A1" data-category="time_dates"
+        <a href="/a1/time_dates" onclick="event.preventDefault();" data-level="A1" data-category="time_dates"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -58,7 +58,7 @@ A1 Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/countries_languages" onclick="event.preventDefault(); startCategory('countries_languages');" data-level="A1" data-category="countries_languages"
+        <a href="/a1/countries_languages" onclick="event.preventDefault();" data-level="A1" data-category="countries_languages"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -69,7 +69,7 @@ A1 Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/directions" onclick="event.preventDefault(); startCategory('directions');" data-level="A1" data-category="directions"
+        <a href="/a1/directions" onclick="event.preventDefault();" data-level="A1" data-category="directions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -80,7 +80,7 @@ A1 Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/basic_phrases" onclick="event.preventDefault(); startCategory('basic_phrases');" data-level="A1" data-category="basic_phrases"
+        <a href="/a1/basic_phrases" onclick="event.preventDefault();" data-level="A1" data-category="basic_phrases"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -91,7 +91,7 @@ A1 Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/communication" onclick="event.preventDefault(); startCategory('communication');" data-level="A1" data-category="communication"
+        <a href="/a1/communication" onclick="event.preventDefault();" data-level="A1" data-category="communication"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -105,39 +105,6 @@ A1 Basics | VokabelMeister
     </div>
 </div>
 
-<!-- Quiz Content (hidden at first) -->
-<div id="quiz-container" class="hidden mt-[54px] flex justify-center">
-    <div id="quiz-wrapper" class="w-full max-w-9xl flex flex-col items-center max-w-3xl mx-auto w-full px-4">
-        
-        <div class="flex justify-center mb-4 gap-4">
-            <button id="mode-de-en" class="px-4 py-2 bg-yellow-300 rounded font-bold">
-                German → English
-            </button>
-            <button id="mode-en-de" class="px-4 py-2 bg-black/40 text-white rounded font-bold">
-                English → German
-            </button>
-        </div>
-
-        <!-- Timer -->
-        <div id="live-timer"
-             class="bg-black/50 p-3 rounded-xl shadow text-center text-yellow-300 text-xl mb-4 font-bold w-full">
-             Time: 0m 0.0s
-        </div>
-
-        <!-- Progress Bar -->
-        <div id="progress-container" class="w-full bg-black/30 rounded-full h-3 mb-4">
-            <div id="progress-bar" class="h-3 bg-yellow-400 rounded-full" style="width: 0%;"></div>
-        </div>
-
-        <!-- Quiz content -->
-        <div id="quiz-content" class="w-full"></div>
-
-        <!-- Back Button -->
-        <button id="quiz-back-button"
-            class="w-full mb-4 bg-black/40 text-white px-4 py-2 rounded-lg hover:bg-black/60 transition font-bold">
-            Go Back
-        </button>
-    </div>
-</div>
+{% include "quiztemplate.html" %}
 
 {% endblock %}

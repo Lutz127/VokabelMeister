@@ -18,6 +18,7 @@ Preferences | VokabelMeister
     <h2 class="text-4xl font-bold mb-6 text-center">Preferences</h2>
 
     <form method="POST" class="space-y-6">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
         <!-- THEME DROPDOWN (Custom Select) -->
         <div class="relative"
@@ -202,6 +203,28 @@ Preferences | VokabelMeister
                     <input type="checkbox" name="plurals" class="sr-only peer"
                         {% if settings.plurals %}checked{% endif %}>
 
+                    <div class="w-14 h-8 bg-gray-600 rounded-full flex items-center p-1
+                                transition-all duration-300
+                                peer-checked:bg-yellow-400
+                                peer-checked:justify-end">
+
+                        <div class="w-6 h-6 bg-white rounded-full transition-all duration-300"></div>
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        <!-- UMLAUTS -->
+        <div>
+            <label class="font-bold text-xl block">Force Umlauts</label>
+
+            <label class="flex items-center justify-between cursor-pointer mt-2">
+
+                <span>Require typing umlauts during English → German </span>
+
+                <div class="flex items-center">
+                    <input type="checkbox" name="force_umlauts" class="sr-only peer"
+                        {% if settings.force_umlauts %}checked{% endif %}>
                     <div class="w-14 h-8 bg-gray-600 rounded-full flex items-center p-1
                                 transition-all duration-300
                                 peer-checked:bg-yellow-400

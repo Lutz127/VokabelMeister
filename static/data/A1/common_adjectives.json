@@ -30,7 +30,7 @@
     {"german": "schmutzig", "english": "dirty", "example": "Der Boden ist schmutzig."},
     {"german": "hell", "english": "bright / light", "example": "Das Zimmer ist hell."},
     {"german": "dunkel", "english": "dark", "example": "Der Keller ist dunkel."},
-    {"german": "schwer", "english": "heavy", "example": "Der Koffer ist schwer."},
+    {"german": "schwer", "english": "heavy / hard / difficult", "example": "Der Koffer ist schwer."},
     {"german": "leicht", "english": "light / easy", "example": "Die Aufgabe ist leicht."},
     {"german": "lang", "english": "long", "example": "Der Weg ist lang."},
     {"german": "kurz", "english": "short", "example": "Der Film ist kurz."},

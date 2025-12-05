@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{% block title %}VokabelMeister | German Vocabulary App{% endblock %}</title>
     {% block meta %}{% endblock %}
     <!-- Favicon -->
@@ -29,7 +30,7 @@
     </noscript>
 
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -107,9 +108,6 @@
         }
     </style>
 
-    <!-- Cloudflare Web Analytics -->
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a0a03717f6304055be8d4f48d3c426fd"}'></script>
-
     {% block extra_head %}{% endblock %}
 </head>
 <body
@@ -121,7 +119,7 @@
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <div id="flash-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 space-y-3">
+        <div id="flash-container" class="fixed top-4 left-1/2 -translate-x-1/2 space-y-3 z-[9127]">
         {% for msg in messages %}
             <div class="flash-msg bg-yellow-400 text-black font-bold px-6 py-3 rounded-xl shadow-lg
                         opacity-0 transform scale-90 transition-all duration-500 text-center">
@@ -159,11 +157,11 @@
 
     <div class="min-h-screen flex flex-col">
         <!-- Navbar -->
-        <header class="bg-zinc-950/20 text-white shadow" x-data="{ open:false }">
+        <header class="bg-zinc-950/20 text-white shadow relative z-50" x-data="{ open:false }">
             <nav class="max-w-8xl mx-auto px-4 py-3 flex items-center justify-between">
 
                 <!-- LOGO -->
-                <a href="{{ url_for('index') }}" class="flex items-center gap-3 font-semibold text-xl">
+                <a href="{{ url_for('landing') }}" class="flex items-center gap-3 font-semibold text-xl">
                     <img src="{{ url_for('static', filename='img/navbar_icon.png') }}" alt="VokabelMeister Logo" class="h-9 w-9 object-contain">
                     <span>VokabelMeister</span>
                 </a>
@@ -210,10 +208,17 @@
                                 Account Data
                             </a>
 
+                            <a href="{{ url_for('future_features') }}"
+                                class="block px-4 py-2 hover:bg-yellow-400 hover:text-black transition">
+                                Future Features
+                            </a>
+
+                            {% if session.user_id %}
                             <a href="{{ url_for('logout') }}"
                                 class="block px-4 py-2 hover:bg-red-600 rounded-b-lg transition">
                                 Log out
                             </a>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -247,7 +252,11 @@
 
                 <a href="{{ url_for('settings') }}" class="block">Preferences</a>
                 <a href="{{ url_for('account') }}" class="block">Account Settings</a>
+                <a href="{{ url_for('future_features') }}" class="block">Future Features</a>
+
+                {% if session.user_id %}
                 <a href="{{ url_for('logout') }}" class="block">Log out</a>
+                {% endif %}
             </div>
         </header>
 
@@ -263,9 +272,10 @@
         <!-- Footer -->
         <footer class="bg-slate-900/20 text-slate-200 text-xs">
             <div class="max-w-8xl mx-auto px-2 py-2 text-center">
-                <span>© 2025 Lutz127 • VokabelMeister v1.5 |</span>
-                <a href="{{ url_for('privacy') }}" class="hover:text-yellow-300">Privacy</a>
-                <a href="{{ url_for('contact') }}" class="hover:text-yellow-300">Contact</a>
+                <span>© 2025 Lutz127 • VokabelMeister v1.5.1 |</span>
+                <a href="{{ url_for('privacy') }}" class="hover:text-yellow-300">Privacy | </a>
+                <a href="{{ url_for('contact') }}" class="hover:text-yellow-300">Contact | </a>
+                <a href="https://ko-fi.com/lutz127" target="_blank" class="hover:text-yellow-300">Support me on Ko-fi</a>
             </div>
         </footer>
 
@@ -276,7 +286,8 @@
         sound: {{ 'true' if settings and settings.sound_enabled else 'false' }},
         strict: {{ 'true' if settings and settings.strict_articles else 'false' }},
         show_examples: {{ 'true' if settings and settings.show_examples else 'false' }},
-        plurals: {{ 'true' if settings and settings.plurals else 'false' }}
+        plurals: {{ 'true' if settings and settings.plurals else 'false' }},
+        force_umlauts: {{ 'true' if settings and settings.force_umlauts else 'false' }}
     };
     </script>
 

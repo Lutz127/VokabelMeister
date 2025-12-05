@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Future Features | VokabelMeister
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.section-fade {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: sectionIn 0.9s ease-out forwards;
+}
+.section-delay-1 { animation-delay: 0.15s; }
+.section-delay-2 { animation-delay: 0.3s; }
+.section-delay-3 { animation-delay: 0.45s; }
+
+@keyframes sectionIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tilt-card {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto mt-14 mb-20 px-4">
+
+    <!-- TITLE -->
+    <div class="section-fade section-delay-1 text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3">
+            Future Features
+        </h1>
+        <p class="text-white/75 max-w-2xl mx-auto text-lg">
+            Here's what's planned for VokabelMeister: upcoming features, improvements, and long-term ideas.
+        </p>
+    </div>
+
+
+    <!-- GRID OF COLUMNS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 section-fade section-delay-2 text-center mb-10">
+
+        <!-- TO DO COLUMN -->
+        <div class="bg-black/60 rounded-3xl p-6 shadow-xl backdrop-blur-md tilt-card">
+            <h2 class="text-2xl font-bold text-yellow-300 mb-4">To Do</h2>
+            <ul class="space-y-2 text-white/85 text-sm">
+                <li>• Display created at in public profile</li>
+                <li>• Button to see leaderboards without finishing a quiz</li>
+                <li>• Show synonyms option</li>
+                <li>• Strict articles & plurals give XP bonus</li>
+                <li>• Customize delay time for next question</li>
+                <li>• WPM display</li>
+                <li>• Randomize synonyms</li>
+                <li>• CEFR mini-test when A2 releases</li>
+            </ul>
+        </div>
+
+        <!-- BIG FEATURES COLUMN -->
+        <div class="bg-black/60 rounded-3xl p-6 shadow-xl backdrop-blur-md tilt-card">
+            <h2 class="text-2xl font-bold text-yellow-300 mb-4">Big Features</h2>
+            <ul class="space-y-2 text-white/85 text-sm">
+                <li>• A2 Vocabulary</li>
+                <li>• Learn mode (Learn words and concepts before quizzes)</li>
+                <li>• Spaced repetition</li>
+                <li>• Custom quizzes</li>
+                <li>• Friends system</li>
+                <li>• Verb conjugation mode</li>
+                <li>• Achievements</li>
+                <li>• Sentence-writing mode</li>
+                <li>• Live 1v1 quiz battles</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- SUPPORT BOX -->
+    <div class="section-fade section-delay-3 mt-12 max-w-full mx-auto">
+        <div class="bg-black/50 p-6 rounded-2xl shadow-xl backdrop-blur-md text-center">
+            <p class="text-xl font-semibold text-white mb-2">☕ Support VokabelMeister!</p>
+            <p class="text-white/75 text-sm mb-3">
+                This project is completely free to use and my first project as a solo developer.<br>  
+                If you'd like to support development, you can do so here:
+            </p>
+            <a href="https://ko-fi.com/Lutz127" target="_blank"
+               class="text-yellow-300 font-bold hover:underline transition">
+               Support me on Ko-fi
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

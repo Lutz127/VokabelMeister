@@ -9,7 +9,7 @@
     {"german": "niedrig / tief", "english": "low / deep", "example": "Das Wasser ist tief."},
     {"german": "leicht", "english": "light (weight)", "example": "Der Koffer ist leicht."},
     {"german": "schwer", "english": "heavy", "example": "Die Kiste ist schwer."},
-    {"german": "dick", "english": "thick", "example": "Das Buch ist dick."},
+    {"german": "dick", "english": "thick / fat", "example": "Das Buch ist dick."},
     {"german": "dünn / schlank", "english": "thin / slim", "example": "Das Papier ist dünn."},
     {"german": "stark / kräftig", "english": "strong", "example": "Der Wind ist stark."},
     {"german": "schwach", "english": "weak", "example": "Das Signal ist schwach."},

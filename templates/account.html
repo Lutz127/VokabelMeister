@@ -28,6 +28,7 @@ Your Account | VokabelMeister
 
         <form action="{{ url_for('upload_avatar') }}" method="POST" enctype="multipart/form-data"
             class="flex flex-col items-center justify-center gap-6">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
             <img src="{{ url_for('uploaded_file', filename=profile.avatar) if profile.avatar
                 else url_for('static', filename='img/default_pfp.png') }}"
@@ -50,6 +51,7 @@ Your Account | VokabelMeister
 
         <!-- Change Username -->
         <form action="{{ url_for('change_username') }}" method="POST" class="bg-black/40 p-4 rounded-lg mb-6">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <label class="block font-bold text-center mb-4 text-2xl">Change Username</label>
             <input type="text" name="new_username"
                 value="{{ profile.username }}"
@@ -62,11 +64,12 @@ Your Account | VokabelMeister
 
         <!-- Change Bio -->
         <form action="{{ url_for('change_bio') }}" method="POST" class="bg-black/40 p-4 rounded-lg mb-3">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <label class="block font-bold mb-4 text-center text-2xl">Biography</label>
             <textarea name="bio"
                     class="w-full p-3 rounded-lg bg-black/60 outline-none mb-3"
                     rows="3"
-                    maxlength="250"
+                    maxlength="60"
                     placeholder="Write something about yourself...">{{ profile.bio }}</textarea>
 
             <button class="bg-yellow-400 text-black font-bold px-4 py-2 rounded-lg hover:bg-yellow-500 transition w-full text-center">
@@ -112,6 +115,7 @@ Your Account | VokabelMeister
             <h3 class="block font-bold mb-4 text-center text-2xl">Country</h3>
 
             <form action="{{ url_for('update_country') }}" method="POST" class="relative">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
                 <!-- SEARCH INPUT -->
                 <input id="country-input"
@@ -155,6 +159,7 @@ Your Account | VokabelMeister
 
     {% if stats %}
     <form action="{{ url_for('clear_best_scores') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="mb-3 bg-black/60 text-white px-4 py-2 rounded w-full
                     hover:bg-red-700 transition font-bold"
                 onclick="return confirm('Are you sure you wanna clear all best scores?');">
@@ -190,6 +195,7 @@ Your Account | VokabelMeister
 
     {% if failed %}
     <form action="{{ url_for('clear_failed_words') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="mb-3 bg-black/60 text-white p-3 px-4 py-2 rounded w-full
                     hover:bg-red-700 transition font-bold">
             Clear Failed Words
@@ -212,6 +218,7 @@ Your Account | VokabelMeister
     <!-- DELETE ACCOUNT -->
     <form action="{{ url_for('delete_account') }}" method="POST"
         onsubmit="return confirm('⚠️ This cannot be undone.\nAre you SURE you want to delete your account forever?');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
         <button class="mt-4 bg-red-600 hover:bg-red-700 w-full px-4 py-3 rounded-lg
                     font-bold text-white transition">

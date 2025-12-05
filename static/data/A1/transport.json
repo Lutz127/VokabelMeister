@@ -13,7 +13,5 @@
     {"german": "die Fahrkarte / das Ticket", "plural": "die Fahrkarten / die Tickets", "english": "ticket", "example": "Ich kaufe eine Fahrkarte nach Hamburg."},
     {"german": "die Linie / die Route", "plural": "die Linien / die Routen", "english": "line / route", "example": "Welche Linie fährt zum Zentrum?"},
     {"german": "die Richtung", "plural": "die Richtungen", "english": "direction", "example": "In welche Richtung geht der Bus?"},
-    {"german": "abfahren / losfahren", "english": "to depart / to leave", "example": "Wir fahren jetzt los."},
-    {"german": "ankommen / eintreffen", "english": "to arrive", "example": "Der Zug trifft um 10 Uhr ein."},
     {"german": "reisen", "english": "to travel", "example": "Ich reise gern in andere Länder."}
 ]

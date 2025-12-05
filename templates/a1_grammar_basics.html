@@ -25,7 +25,7 @@ A1 Grammar Basics | VokabelMeister
     <!-- Category Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <a href="/a1/w_questions" onclick="event.preventDefault(); startCategory('w_questions');" data-level="A1" data-category="w_questions"
+        <a href="/a1/w_questions" onclick="event.preventDefault();" data-level="A1" data-category="w_questions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -36,7 +36,7 @@ A1 Grammar Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/prepositions" onclick="event.preventDefault(); startCategory('prepositions');" data-level="A1" data-category="prepositions"
+        <a href="/a1/prepositions" onclick="event.preventDefault();" data-level="A1" data-category="prepositions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -47,7 +47,7 @@ A1 Grammar Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/pronouns" onclick="event.preventDefault(); startCategory('pronouns');" data-level="A1" data-category="pronouns"
+        <a href="/a1/pronouns" onclick="event.preventDefault();" data-level="A1" data-category="pronouns"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -58,7 +58,7 @@ A1 Grammar Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/conversation_particles" onclick="event.preventDefault(); startCategory('conversation_particles');" data-level="A1" data-category="conversation_particles"
+        <a href="/a1/conversation_particles" onclick="event.preventDefault();" data-level="A1" data-category="conversation_particles"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -69,7 +69,7 @@ A1 Grammar Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/negation" onclick="event.preventDefault(); startCategory('negation');" data-level="A1" data-category="negation"
+        <a href="/a1/negation" onclick="event.preventDefault();" data-level="A1" data-category="negation"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -80,7 +80,7 @@ A1 Grammar Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/time_expressions" onclick="event.preventDefault(); startCategory('time_expressions');" data-level="A1" data-category="time_expressions"
+        <a href="/a1/time_expressions" onclick="event.preventDefault();" data-level="A1" data-category="time_expressions"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -91,7 +91,7 @@ A1 Grammar Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/possesive_pronouns" onclick="event.preventDefault(); startCategory('possesive_pronouns');" data-level="A1" data-category="possesive_pronouns"
+        <a href="/a1/possesive_pronouns" onclick="event.preventDefault();" data-level="A1" data-category="possesive_pronouns"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -102,17 +102,7 @@ A1 Grammar Basics | VokabelMeister
             </div>
         </a>
 
-        <a href="/a1/demonstratives" onclick="event.preventDefault(); startCategory('demonstratives');" data-level="A1" data-category="demonstratives"
-           class="category-card relative flex items-center justify-center 
-                  bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
-                  hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
-            <h2 class="text-[1.4rem] font-semibold text-white text-center">Demonstratives</h2>
-            <div class="progress-demonstratives absolute bottom-0 left-0 w-full h-2 bg-black/40 rounded-b-xl overflow-hidden">
-                <div class="progress-inner h-full transition-all duration-500" style="width:0%"></div>
-            </div>
-        </a>
-
-        <a href="/a1/quantifiers" onclick="event.preventDefault(); startCategory('quantifiers');" data-level="A1" data-category="quantifiers"
+        <a href="/a1/quantifiers" onclick="event.preventDefault();" data-level="A1" data-category="quantifiers"
            class="category-card relative flex items-center justify-center 
                   bg-black/70 backdrop-blur-md shadow rounded-xl p-5 overflow-hidden
                   hover:shadow-xl hover:scale-[1.05] transition cursor-pointer select-none">
@@ -125,41 +115,6 @@ A1 Grammar Basics | VokabelMeister
     </div>
 </div>
 
-<!-- Quiz Content (hidden at first) -->
-<div id="quiz-container" class="hidden mt-[54px] flex justify-center">
-    <div id="quiz-wrapper" class="w-full max-w-9xl flex flex-col items-center max-w-3xl mx-auto w-full px-4">
-        
-        <div class="flex justify-center mb-4 gap-4">
-            <button id="mode-de-en" class="px-4 py-2 bg-yellow-300 rounded font-bold">
-                German → English
-            </button>
-            <button id="mode-en-de" class="px-4 py-2 bg-black/40 text-white rounded font-bold">
-                English → German
-            </button>
-        </div>
-
-        <!-- Timer -->
-        <div id="live-timer"
-             class="bg-black/50 p-3 rounded-xl shadow text-center text-yellow-300 text-xl mb-4 font-bold w-full">
-             Time: 0m 0.0s
-        </div>
-
-        <!-- Progress Bar -->
-        <div id="progress-container" class="w-full bg-black/30 rounded-full h-3 mb-4">
-            <div id="progress-bar" class="h-3 bg-yellow-400 rounded-full" style="width: 0%;"></div>
-        </div>
-
-        <!-- Quiz content -->
-        <div id="quiz-content" class="w-full"></div>
-
-        <!-- Back Button -->
-        <button id="quiz-back-button"
-            class="w-full mb-4 bg-black/40 text-white px-4 py-2 rounded-lg hover:bg-black/60 transition font-bold">
-            Go Back
-        </button>
-    </div>
-</div>
-
-
+{% include "quiztemplate.html" %}
 
 {% endblock %}

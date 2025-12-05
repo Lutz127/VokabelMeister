@@ -20,6 +20,7 @@ Login | VokabelMeister
     <h2 class="text-3xl font-bold mb-4">Log In</h2>
 
     <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input name="username"
                class="w-full p-3 rounded mb-4 text-black"
                placeholder="Username" required>

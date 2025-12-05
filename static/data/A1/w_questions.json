@@ -7,7 +7,7 @@
     {"german": "wohin?", "english": "where to?", "example": "Wohin gehst du?"},
     {"german": "wie?", "english": "how?", "example": "Wie geht's dir?"},
     {"german": "warum?", "english": "why?", "example": "Warum bist du müde?"},
-    {"german": "welcher?", "english": "which?", "example": "Welcher Bus fährt zum Zentrum?"},
+    {"german": "welcher? / welche? / welches?", "english": "which?", "example": "Welcher Bus fährt zum Zentrum?"},
     {"german": "wie viel?", "english": "how much?", "example": "Wie viel kostet das?"},
     {"german": "wie viele?", "english": "how many?", "example": "Wie viele Leute kommen?"},
     {"german": "wessen?", "english": "whose?", "example": "Wessen Tasche ist das?"}

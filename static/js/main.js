@@ -1,4 +1,7 @@
+const csrfToken = document.querySelector("meta[name='csrf-token']")?.content;
+
 document.addEventListener("DOMContentLoaded", () => {
+
 
     const cards = document.querySelectorAll(".category-card");
     const quizContainer = document.getElementById("quiz-container");
@@ -143,6 +146,22 @@ function updateModeButtons() {
     }
 }
 
+function requiresUmlauts(user, correct) {
+    if (!window.userSettings?.force_umlauts) return false;
+
+    const map = {
+        'ae': 'ä',
+        'oe': 'ö',
+        'ue': 'ü'
+    };
+
+    if (correct.includes("ä") && !user.includes("ä")) return true;
+    if (correct.includes("ö") && !user.includes("ö")) return true;
+    if (correct.includes("ü") && !user.includes("ü")) return true;
+
+    return false;
+}
+
 function normalizeGerman(str) {
     return str
         .toLowerCase()
@@ -186,7 +205,6 @@ const categoryGroups = {
         "negation",
         "time_expressions",
         "possesive_pronouns",
-        "demonstratives",
         "quantifiers"
     ],
     a1_cat_people_daily_life: [
@@ -395,13 +413,67 @@ pulseStyle.textContent = `
 `;
 document.head.appendChild(pulseStyle);
 
+function updateQuizMargin() {
+    const qc = document.getElementById("quiz-container");
+    const prefs = window.userSettings;
+
+    const hasAnyPreference =
+        prefs.strict ||
+        prefs.plurals ||
+        prefs.force_umlauts;
+
+    // Remove both possible classes first
+    qc.classList.remove("mt-[1px]", "mt-[54px]");
+
+    // Apply new margin
+    if (hasAnyPreference) {
+        qc.classList.add("mt-[1px]");
+    } else {
+        qc.classList.add("mt-[54px]");
+    }
+}
+
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = (seconds % 60).toFixed(2);
+    return `${m}m ${s}s`;
+}
+
 // Quiz logic
 function startQuiz(words, category) {
 
     // FULL RESET
     currentRedrawQuestion = null;  // clear previous redraw function
     clearAllQuizTimers();          // stop leftover timers
+    
+    // Update active preferences UI
+    const prefBox = document.getElementById("active-preferences");
+    if (prefBox) {
 
+        prefBox.innerHTML = "";
+        
+        const prefs = [];
+
+        if (window.userSettings.strict) prefs.push("Strict Articles");
+        if (window.userSettings.plurals) prefs.push("Plurals");
+        if (window.userSettings.force_umlauts) prefs.push("Umlauts");
+
+        if (prefs.length > 0) {
+            prefBox.classList.remove("hidden");
+
+            prefs.forEach(label => {
+                const pill = document.createElement("div");
+                pill.className =
+                    "bg-black/50 text-yellow-300 px-3 py-1 rounded-lg text-sm font-semibold shadow";
+                pill.innerText = label;
+                prefBox.appendChild(pill);
+            });
+        } else {
+            prefBox.classList.add("hidden");
+        }
+
+        updateQuizMargin();
+    }
 
     const quizContainer = document.getElementById("quiz-container");
     quizContainer.classList.remove("hidden");
@@ -414,6 +486,7 @@ function startQuiz(words, category) {
     activeTimers.push(timerInterval);
 
     // Reset UI
+    document.getElementById("active-preferences")?.classList.remove("hidden");
     document.getElementById("quiz-back-button")?.classList.remove("hidden");
     document.getElementById("quiz-content").innerHTML = "";
     document.getElementById("progress-bar").style.width = "0%";
@@ -424,7 +497,7 @@ function startQuiz(words, category) {
 
         let displayGerman = item.german.split("/").map(s => s.trim())[0];
 
-        if (quizMode === "de-to-en" && userSettings.plurals && item.plural) {
+        if (quizMode === "de-to-en" && window.userSettings.plurals && item.plural) {
             const pluralFirst = item.plural.split("/").map(s => s.trim())[0];
             displayGerman += ` (${pluralFirst})`;
         }
@@ -520,11 +593,11 @@ function startQuiz(words, category) {
         );
 
         // Normalize correct answers
-        userInput = userInput.replace(/^to\s+/, "");
+        userInput = userInput.replace(/^to\s+(?=[a-zA-Z])/, "");
         userInput = userInput.replace(/\?/g, "");
         userInput = userInput.replace(/\(.*?\)/g, "");
 
-        correctRaw = correctRaw.replace(/to\s+/g, "");
+        correctRaw = correctRaw.replace(/^to\s+(?=[a-zA-Z])/, "");
         correctRaw = correctRaw.replace(/\?/g, "");
         correctRaw = correctRaw.replace(/\(.*?\)/g, "");
 
@@ -546,7 +619,12 @@ function startQuiz(words, category) {
 
         if (quizMode === "en-to-de") {
 
-            let germanForms = correctList; // already split
+            let germanForms = correctList;
+
+            if (germanForms.length > 0) {
+                const infinitive = germanForms[0];
+                userInput = normalizeSeparableVerb(userInput, infinitive);
+            }
 
             if (articleStrict) {
                 // strict: full match including article
@@ -576,6 +654,14 @@ function startQuiz(words, category) {
                 );
 
                 isCorrect = normalizedCorrect.includes(normalizedUser);
+            }
+
+            // Force umlauts
+            if (isCorrect && window.userSettings?.force_umlauts === true) {
+                const rawCorrect = germanForms[0];
+                if (requiresUmlauts(userInput, rawCorrect)) {
+                    isCorrect = false;
+                }
             }
         } else {
             isCorrect = correctList.includes(userInput);
@@ -630,7 +716,10 @@ function startQuiz(words, category) {
             // Save failed word to backend
             fetch("/save_failure", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken
+                },
                 body: JSON.stringify({
                     category: category,
                     word: words[index].german,
@@ -689,6 +778,7 @@ function startQuiz(words, category) {
 async function showResults() {
 
     document.getElementById("quiz-back-button")?.classList.add("hidden");
+    document.getElementById("active-preferences")?.classList.add("hidden");
 
     let endTime = Date.now();
     let totalTime = (endTime - startTime) / 1000; // full decimal precision
@@ -699,7 +789,10 @@ async function showResults() {
     // Save the score
     await fetch("/save_score", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+        },
         body: JSON.stringify({
             category: category,
             score: score,
@@ -719,7 +812,10 @@ async function showResults() {
     // Save leaderboard entry (wait for completion)
     await fetch("/save_leaderboard", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+        },
         body: JSON.stringify({
             category: category,
             score: score,
@@ -727,13 +823,10 @@ async function showResults() {
         })
     });
 
-
-
     document.getElementById("live-timer").classList.add("hidden");
     document.getElementById("progress-container").classList.add("hidden");
     document.getElementById("mode-de-en").classList.add("hidden");
     document.getElementById("mode-en-de").classList.add("hidden");
-
 
     let leaderboardHTML = "";
 
@@ -776,7 +869,7 @@ async function showResults() {
             <div class="flex justify-between py-1">
                 <span class="text-yellow-300">${i + 1}.</span>
                 <span>${r.username}</span>
-                <span>${r.time.toFixed(2)}s</span>
+                <span>${formatTime(r.time)}</span>
             </div>
         `).join("");
     });

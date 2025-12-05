@@ -15,5 +15,5 @@
     {"german": "der Rücken", "plural": "die Rücken", "english": "back", "example": "Mein Rücken tut weh."},
     {"german": "das Bein", "plural": "die Beine", "english": "leg", "example": "Ich kann mein Bein nicht bewegen."},
     {"german": "der Fuß", "plural": "die Füße", "english": "foot", "example": "Meine Füße sind müde."},
-    {"german": "der Bauch", "plural": "die Bäuche", "english": "belly / stomach", "example": "Ich habe Bauchschmerzen."}
+    {"german": "der Bauch", "plural": "die Bäuche", "english": "stomach / belly", "example": "Ich habe Bauchschmerzen."}
 ]

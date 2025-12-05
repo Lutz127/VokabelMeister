@@ -10,3 +10,4 @@ Pillow
 flask-limiter
 limits
 Flask-Compress
+Flask-WTF

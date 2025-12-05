@@ -3,6 +3,6 @@
     {"german": "kein / keine", "english": "no / none / not any", "example": "Ich habe keine Zeit."},
     {"german": "niemals / nie", "english": "never", "example": "Ich werde das niemals machen."},
     {"german": "ohne", "english": "without", "example": "Ich trinke Kaffee ohne Zucker."},
-    {"german": "weder ... noch", "english": "neither ... nor", "example": "Ich mag weder Kaffee noch Tee."},
+    {"german": "weder noch", "english": "neither nor", "example": "Ich mag weder Kaffee noch Tee."},
     {"german": "kaum", "english": "barely / hardly", "example": "Ich habe kaum Geld."}
 ]

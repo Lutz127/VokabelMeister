@@ -443,6 +443,24 @@ This required splitting answers, trimming whitespace, normalizing case, and chec
 
 ## Update Changelog
 
+### v1.5.1 (December 5th 2025)
+
+- Enabled CSRF protection on all forms and API POST routes
+
+- Preferences now shown while playing a quiz
+
+- Added Force Umlauts preference
+
+- Changed display in leaderboards from seconds to minutes and seconds
+
+- Added Future Features page
+
+- Changed bio character limit to 60 to avoid overflowing bugs on mobile
+
+- Added Support me button with Ko-Fi
+
+- Lowered SFX volume of the incorrect SFX
+
 ### v1.5 (December 4th 2025)
 
 - Rebranded the project from “German Vocabulary App” to VokabelMeister

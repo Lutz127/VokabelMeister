@@ -7,9 +7,11 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta, date
 from PIL import Image, ImageOps, ImageDraw
 from flask_compress import Compress
+from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
 Compress(app)
+csrf = CSRFProtect(app)
 
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -40,9 +42,13 @@ def allowed_file(filename):
 # Secure session cookies
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
-app.config["SESSION_COOKIE_SECURE"] = False
+app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_PERMANENT"] = True
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=30)
+
+# Enable CSRF
+app.config["WTF_CSRF_ENABLED"] = True
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "fallback-secret")
 
 def execute(db, query, params=()):
     """Automatically choose placeholder style depending on DB engine."""
@@ -175,7 +181,6 @@ app.jinja_env.filters["country_flag"] = iso_to_emoji
 def robots_txt():
     return send_from_directory("static", "robots.txt", mimetype="text/plain")
 
-
 @app.route("/sitemap.xml")
 def sitemap_xml():
     return send_from_directory("static", "sitemap.xml", mimetype="application/xml")
@@ -195,6 +200,10 @@ def privacy():
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
+
+@app.route("/future_features")
+def future_features():
+    return render_template("future_features.html")
 
 @app.teardown_appcontext
 def close_db(exception):
@@ -637,8 +646,8 @@ def change_bio():
     new_bio = request.form.get("bio", "").strip()
 
     # Optional: limit length
-    if len(new_bio) > 150:
-        flash("Bio must be 150 characters or less.")
+    if len(new_bio) > 60:
+        flash("Bio must be 60 characters or less.")
         return redirect("/account")
 
     db = get_db()
@@ -772,14 +781,15 @@ def settings():
         strict = bool(request.form.get("strict_articles"))
         show_examples = bool(request.form.get("show_examples"))
         plurals = bool(request.form.get("plurals"))
+        force_umlauts = bool(request.form.get("force_umlauts"))
 
         # only keep custom_color when theme = custom
         if theme != "custom":
             custom_color = None
 
         execute(db, """
-            INSERT INTO user_settings (user_id, theme, sound_enabled, custom_color, speedrun_enabled, strict_articles, show_examples, plurals)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO user_settings (user_id, theme, sound_enabled, custom_color, speedrun_enabled, strict_articles, show_examples, plurals, force_umlauts)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (user_id)
             DO UPDATE SET
                 theme = EXCLUDED.theme,
@@ -788,8 +798,9 @@ def settings():
                 speedrun_enabled = EXCLUDED.speedrun_enabled,
                 strict_articles = EXCLUDED.strict_articles,
                 show_examples = EXCLUDED.show_examples,
-                plurals = EXCLUDED.plurals
-        """, (session["user_id"], theme, sound, custom_color, speedrun, strict, show_examples, plurals))
+                plurals = EXCLUDED.plurals,
+                force_umlauts = EXCLUDED.force_umlauts
+        """, (session["user_id"], theme, sound, custom_color, speedrun, strict, show_examples, plurals, force_umlauts))
 
         db.commit()
         flash("Settings updated!")
@@ -804,8 +815,8 @@ def settings():
         execute(db, """
             INSERT INTO user_settings (
                 user_id, theme, sound_enabled, custom_color,
-                speedrun_enabled, strict_articles, show_examples, plurals
-            ) VALUES (%s, 'german', TRUE, NULL, FALSE, FALSE, TRUE, FALSE)
+                speedrun_enabled, strict_articles, show_examples, plurals, force_umlauts
+            ) VALUES (%s, 'german', TRUE, NULL, FALSE, FALSE, TRUE, FALSE, FALSE)
         """, (session["user_id"],))
         db.commit()
 
@@ -839,7 +850,8 @@ def inject_settings():
             "speedrun_enabled": False,
             "custom_color": None,
             "show_examples": True,
-            "plurals": False
+            "plurals": False,
+            "force_umlauts": False
         }}
 
     db = get_db()
@@ -857,7 +869,8 @@ def inject_settings():
             "speedrun_enabled": False,
             "custom_color": None,
             "show_examples": True,
-            "plurals": False
+            "plurals": False,
+            "force_umlauts": False
         }}
 
     return {"settings": s}
@@ -1096,4 +1109,4 @@ def api_failed_words_count():
     return jsonify({"count": count})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

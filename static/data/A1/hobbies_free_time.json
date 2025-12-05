@@ -15,6 +15,7 @@
     {"german": "ins Kino gehen", "english": "to go to the cinema", "example": "Wir gehen ins Kino."},
     {"german": "spazieren gehen", "english": "to go for a walk", "example": "Ich gehe im Park spazieren."},
     {"german": "reisen / verreisen", "english": "to travel", "example": "Ich reise gern im Sommer."},
-    {"german": "zeichnen / malen", "english": "to draw / to paint", "example": "Sie malt ein Bild."},
+    {"german": "zeichnen", "english": "to draw", "example": "Ich zeichne ein Haus."},
+    {"german": "malen", "english": "to paint", "example": "Sie malt ein Bild."},
     {"german": "fotografieren", "english": "to take photos", "example": "Er fotografiert viel."}
 ]
