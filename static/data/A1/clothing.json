@@ -1,6 +1,6 @@
 [
     {"german": "das T-Shirt", "plural": "die T-Shirts", "english": "t-shirt", "example": "Ich trage ein T-Shirt."},
-    {"german": "die Hose", "plural": "die Hosen", "english": "pants", "example": "Die Hose ist zu lang."},
+    {"german": "die Hose", "plural": "die Hosen", "english": "pants / trousers", "example": "Die Hose ist zu lang."},
     {"german": "die Jeans", "plural": "die Jeans", "english": "jeans", "example": "Ich kaufe neue Jeans."},
     {"german": "das Hemd", "plural": "die Hemden", "english": "shirt", "example": "Das Hemd ist blau."},
     {"german": "der Pulli / der Pullover", "plural": "die Pullis / die Pullover", "english": "sweater", "example": "Ich ziehe einen Pulli an."},

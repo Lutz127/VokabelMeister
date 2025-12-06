@@ -446,9 +446,17 @@ function normalizeEnglish(str) {
         s = s.slice(4);
     }
 
-    s = s.replace(/\?/g, "").replace(/\(.*?\)/g, "");
+    if (s.startsWith("to ")) {
+        s = s.slice(3);
+    }
 
-    return s;
+    s = s
+        .replace(/'/g, "")
+        .replace(/,/g, "")
+        .replace(/\?/g, "")
+        .replace(/\(.*?\)/g, "");
+
+    return s.trim();
 }
 
 // Quiz logic
@@ -605,13 +613,12 @@ function startQuiz(words, category) {
         );
 
         // Normalize correct answers
-        userInput = userInput.replace(/^to\s+(?=[a-zA-Z])/, "");
-        userInput = userInput.replace(/\?/g, "");
-        userInput = userInput.replace(/\(.*?\)/g, "");
+        userInput = userInput
+            .replace(/^to\s+(?=[a-zA-Z])/, "")
+            .replace(/\?/g, "")
+            .replace(/\(.*?\)/g, "");
 
-        correctRaw = correctRaw.replace(/^to\s+(?=[a-zA-Z])/, "");
-        correctRaw = correctRaw.replace(/\?/g, "");
-        correctRaw = correctRaw.replace(/\(.*?\)/g, "");
+        correctRaw = correctRaw.toLowerCase().trim();
 
         let correctList = correctRaw.split("/").map(s => s.trim());
 
@@ -632,11 +639,6 @@ function startQuiz(words, category) {
         if (quizMode === "en-to-de") {
 
             let germanForms = correctList;
-
-            if (germanForms.length > 0) {
-                const infinitive = germanForms[0];
-                userInput = normalizeSeparableVerb(userInput, infinitive);
-            }
 
             if (articleStrict) {
                 // strict: full match including article

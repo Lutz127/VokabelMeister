@@ -1,5 +1,5 @@
 [
-    {"german": "der Sport", "plural": "die Sportarten", "english": "sport", "example": "Ich mache gern Sport."},
+    {"german": "der Sport", "plural": "die Sportarten", "english": "sport / exercise", "example": "Ich mache gern Sport."},
     {"german": "das Hobby", "plural": "die Hobbys", "english": "hobby", "example": "Mein Hobby ist Musik."},
     {"german": "lesen", "english": "to read", "example": "Ich lese ein Buch."},
     {"german": "schreiben", "english": "to write", "example": "Ich schreibe jeden Tag."},

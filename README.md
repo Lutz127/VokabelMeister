@@ -443,6 +443,14 @@ This required splitting answers, trimming whitespace, normalizing case, and chec
 
 ## Update Changelog
 
+### v1.5.2 (December 6th 2025)
+
+- Normalized user input by removing "the"
+
+- Fixed english to german mode not working
+
+- Slight changes in the vocabulary
+
 ### v1.5.1 (December 5th 2025)
 
 - Enabled CSRF protection on all forms and API POST routes
