@@ -5,7 +5,7 @@
     {"german": "grün", "english": "green", "example": "Der Apfel ist grün."},
     {"german": "schwarz", "english": "black", "example": "Die Katze ist schwarz."},
     {"german": "weiß", "english": "white", "example": "Der Schnee ist weiß."},
-    {"german": "grau", "english": "gray", "example": "Der Hund ist grau."},
+    {"german": "grau", "english": "gray / grey", "example": "Der Hund ist grau."},
     {"german": "braun", "english": "brown", "example": "Der Tisch ist braun."},
     {"german": "orange", "english": "orange", "example": "Der Ball ist orange."},
     {"german": "rosa / pink", "english": "pink", "example": "Das Kleid ist rosa."},
